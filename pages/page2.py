@@ -12,21 +12,17 @@ import plotly.graph_objs as go
 import json
 
 # Directories
-bids_dir = 'bids'
-deriv_dir = os.path.join(bids_dir, 'derivatives')
-preproc_dir = os.path.join(deriv_dir, 'fmrwhy-preproc')
-qc_dir = os.path.join(deriv_dir, 'fmrwhy-qc')
-me_dir = os.path.join(deriv_dir, 'fmrwhy-multiecho')
+data_dir = 'assets'
 
 # Filenames
-participants_fn = 'bids/participants.tsv'
-fdallsubs_fn = os.path.join(qc_dir, 'sub-all_task-all_run-all_desc-fdallsubs.tsv')
-fdmean_fn = os.path.join(qc_dir, 'sub-all_task-all_run-all_desc-fdmean.tsv')
-fdsum_fn = os.path.join(qc_dir, 'sub-all_task-all_run-all_desc-fdsum.tsv')
-tsnrgm_fn = os.path.join(qc_dir, 'sub-all_task-all_run-all_desc-tsnrgm.tsv')
-tsnrwm_fn = os.path.join(qc_dir, 'sub-all_task-all_run-all_desc-tsnrwm.tsv')
-tsnrcsf_fn = os.path.join(qc_dir, 'sub-all_task-all_run-all_desc-tsnrcsf.tsv')
-tsnrbrain_fn = os.path.join(qc_dir, 'sub-all_task-all_run-all_desc-tsnrbrain.tsv')
+participants_fn = 'assets/participants.tsv'
+fdallsubs_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdallsubs.tsv')
+fdmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdmean.tsv')
+fdsum_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdsum.tsv')
+tsnrgm_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrgm.tsv')
+tsnrwm_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrwm.tsv')
+tsnrcsf_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrcsf.tsv')
+tsnrbrain_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrbrain.tsv')
 
 # Get data
 df_participants = pd.read_csv(participants_fn, sep='\t')
@@ -68,7 +64,7 @@ fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
 
 # Fig 2
 sub = 'sub-001'
-fd_fn = os.path.join(qc_dir, sub, sub+'_task-all_run-all_desc-fd.tsv')
+fd_fn = os.path.join(data_dir, sub+'_task-all_run-all_desc-fd.tsv')
 df_fd = pd.read_csv(fd_fn, sep='\t')
 data = []
 layout = go.Layout(title='Distributions of framewise displacement for all functional runs - '+sub,
@@ -85,10 +81,10 @@ fig2.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
 
 #Fig 3
 sub = 'sub-001'
-braintsnr_tsv = os.path.join(me_dir, sub, sub+'_task-rest_run-1_echo-2_desc-rapreproc_braintsnr.tsv')
-GMtsnr_tsv = os.path.join(me_dir, sub, sub+'_task-rest_run-1_echo-2_desc-rapreproc_GMtsnr.tsv')
-WMtsnr_tsv = os.path.join(me_dir, sub, sub+'_task-rest_run-1_echo-2_desc-rapreproc_WMtsnr.tsv')
-CSFtsnr_tsv = os.path.join(me_dir, sub, sub+'_task-rest_run-1_echo-2_desc-rapreproc_CSFtsnr.tsv')
+braintsnr_tsv = os.path.join(data_dir, sub+'_task-rest_run-1_echo-2_desc-rapreproc_braintsnr.tsv')
+GMtsnr_tsv = os.path.join(data_dir, sub+'_task-rest_run-1_echo-2_desc-rapreproc_GMtsnr.tsv')
+WMtsnr_tsv = os.path.join(data_dir, sub+'_task-rest_run-1_echo-2_desc-rapreproc_WMtsnr.tsv')
+CSFtsnr_tsv = os.path.join(data_dir, sub+'_task-rest_run-1_echo-2_desc-rapreproc_CSFtsnr.tsv')
 df_braintsnr = pd.read_csv(braintsnr_tsv, sep='\t').dropna()
 df_GMtsnr = pd.read_csv(GMtsnr_tsv, sep='\t').dropna()
 df_WMtsnr = pd.read_csv(WMtsnr_tsv, sep='\t').dropna()
@@ -152,17 +148,47 @@ layout = html.Div([
 
 
 
-# Callback for updating dropdown2 based on dropdown1 value
+# Callback for updating tsnr html and figure based on drop1, radio1, radio2 values
 @app.callback(
-    Output('target2', 'src'),
+    [Output('target2', 'src'),
+     Output('fig3', 'figure')],
     [Input('drop1','value'),
      Input('radio1','value'),
      Input('radio2','value')]
 )
-def reset_tsnr_img(sub, task, run):
+def reset_tsnr_imgs(sub, task, run):
 
-    html_fn = '/assets/' + sub + '_task-' + task + '_run-' + run + '_echo-2_desc-rapreproc_tsnr.html'
-    return html_fn
+    html_fn = '/assets/' + sub + '_task-' + task + '_run-' + run + '_echo-2_space-MNI152_desc-rapreproc_tsnr.html'
+
+    braintsnr_tsv = os.path.join(data_dir, sub+'_task-' + task + '_run-' + run + '_echo-2_desc-rapreproc_braintsnr.tsv')
+    GMtsnr_tsv = os.path.join(data_dir, sub+'_task-' + task + '_run-' + run + '_echo-2_desc-rapreproc_GMtsnr.tsv')
+    WMtsnr_tsv = os.path.join(data_dir, sub+'_task-' + task + '_run-' + run + '_echo-2_desc-rapreproc_WMtsnr.tsv')
+    CSFtsnr_tsv = os.path.join(data_dir, sub+'_task-' + task + '_run-' + run + '_echo-2_desc-rapreproc_CSFtsnr.tsv')
+    df_braintsnr = pd.read_csv(braintsnr_tsv, sep='\t').dropna()
+    df_GMtsnr = pd.read_csv(GMtsnr_tsv, sep='\t').dropna()
+    df_WMtsnr = pd.read_csv(WMtsnr_tsv, sep='\t').dropna()
+    df_CSFtsnr = pd.read_csv(CSFtsnr_tsv, sep='\t').dropna()
+    dat1 = df_braintsnr['tsnr'].to_numpy()
+    dat2 = df_GMtsnr['tsnr'].to_numpy()
+    dat3 = df_WMtsnr['tsnr'].to_numpy()
+    dat4 = df_CSFtsnr['tsnr'].to_numpy()
+    layout = go.Layout(
+            yaxis = dict(title = 'Masks'),
+            xaxis=dict(title='Temporal signal-to-noise ratio (tSNR)'),
+            # autosize=False,
+            # width=500,
+            margin={
+                  't': 0,
+                })
+    fig3 = go.Figure(layout=layout)
+    fig3.add_trace(go.Violin(x=dat1, line_color=sequential.Inferno[5], name='Brain'))
+    fig3.add_trace(go.Violin(x=dat2, line_color=sequential.Inferno[6], name='GM'))
+    fig3.add_trace(go.Violin(x=dat3, line_color=sequential.Inferno[7], name='WM'))
+    fig3.add_trace(go.Violin(x=dat4, line_color=sequential.Inferno[8], name='CSF'))
+    fig3.update_traces(orientation='h', side='positive', width=3, points=False)
+    fig3.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
+
+    return [html_fn, fig3]
 
 
 
@@ -176,7 +202,7 @@ def update_graph(clickData):
         raise PreventUpdate
     else:
         selected_sub = clickData['points'][0]['x']
-        fd_fn = os.path.join(qc_dir, selected_sub, selected_sub+'_task-all_run-all_desc-fd.tsv')
+        fd_fn = os.path.join(data_dir, selected_sub+'_task-all_run-all_desc-fd.tsv')
         df_fd = pd.read_csv(fd_fn, sep='\t')
         data = []
         layout = go.Layout(title='Distributions of framewise displacement for all functional runs - '+selected_sub,
@@ -230,7 +256,7 @@ def render_tab_content(active_tab):
                             dcc.Dropdown(
                                 id='drop1',
                                 options=sub_opts,
-                                value='sub-005',
+                                value='sub-001',
                             )],
                         )),
                         dbc.Row(dbc.Col([
@@ -254,7 +280,7 @@ def render_tab_content(active_tab):
                         html.Br([]),
                         dbc.Row(dbc.Col([
                             # dbc.Label('Run'),
-                            html.Iframe(id='target2', src='/assets/viewer.html', style={'border': 'none', 'width': '100%', 'height': 250})],
+                            html.Iframe(id='target2', src='/assets/sub-001_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html', style={'border': 'none', 'width': '100%', 'height': 250})],
                         )),
                     ], width={"size": 6, "offset": 0}),
                     dbc.Col([

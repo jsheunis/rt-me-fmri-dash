@@ -2,7 +2,147 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4341848-747f-40ec-813d-d75b725c32ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-emotion_run-1_space-individual_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-emotion_run-2_space-individual_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-motor_run-1_space-individual_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-motor_run-2_space-individual_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-rest_run-1_space-individual_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-rest_run-2_space-individual_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-1_echo-2_desc-rapreproc_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-1_echo-2_desc-rapreproc_tsnr.nii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-2_echo-2_desc-rapreproc_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-2_echo-2_desc-rapreproc_tsnr.nii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-motor_run-1_echo-2_desc-rapreproc_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-motor_run-1_echo-2_desc-rapreproc_tsnr.nii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-motor_run-2_echo-2_desc-rapreproc_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-motor_run-2_echo-2_desc-rapreproc_tsnr.nii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-rest_run-1_echo-2_desc-rapreproc_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-rest_run-1_echo-2_desc-rapreproc_tsnr.nii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-rest_run-2_echo-2_desc-rapreproc_tsnr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-rest_run-2_echo-2_desc-rapreproc_tsnr.nii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/viewer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-001/sub-001_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-002/sub-002_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-003/sub-003_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-004/sub-004_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-005/sub-005_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-006/sub-006_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-007/sub-007_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-010/sub-010_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-011/sub-011_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-012/sub-012_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-013/sub-013_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-015/sub-015_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-016/sub-016_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-017/sub-017_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-018/sub-018_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-019/sub-019_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-020/sub-020_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-021/sub-021_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-022/sub-022_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-023/sub-023_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-024/sub-024_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-025/sub-025_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-026/sub-026_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-027/sub-027_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-029/sub-029_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-030/sub-030_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-031/sub-031_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-032/sub-032_task-all_run-all_desc-fd.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-all_task-all_run-all_desc-fdallsubs.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-all_task-all_run-all_desc-fdmean.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-all_task-all_run-all_desc-fdsum.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-all_task-all_run-all_desc-tsnrbrain.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-all_task-all_run-all_desc-tsnrcsf.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-all_task-all_run-all_desc-tsnrgm.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/derivatives/fmrwhy-qc/sub-all_task-all_run-all_desc-tsnrwm.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bids/participants.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEt2star_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEt2star_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEt2star_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEt2star_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEte_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEte_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEte_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEte_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEtsnr_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEtsnr_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEtsnr_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_desc-combinedMEtsnr_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_echo-2_desc-rapreproc_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_echo-2_desc-rapreproc_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_echo-2_desc-rapreproc_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-1_echo-2_desc-rapreproc_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEt2star_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEt2star_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEt2star_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEt2star_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEte_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEte_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEte_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEte_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEtsnr_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEtsnr_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEtsnr_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_desc-combinedMEtsnr_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_echo-2_desc-rapreproc_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_echo-2_desc-rapreproc_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_echo-2_desc-rapreproc_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-emotion_run-2_echo-2_desc-rapreproc_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEt2star_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEt2star_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEt2star_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEt2star_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEte_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEte_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEte_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEte_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEtsnr_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEtsnr_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEtsnr_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_desc-combinedMEtsnr_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_echo-2_desc-rapreproc_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_echo-2_desc-rapreproc_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_echo-2_desc-rapreproc_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-1_echo-2_desc-rapreproc_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEt2star_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEt2star_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEt2star_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEt2star_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEte_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEte_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEte_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEte_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEtsnr_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEtsnr_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEtsnr_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_desc-combinedMEtsnr_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_echo-2_desc-rapreproc_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_echo-2_desc-rapreproc_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_echo-2_desc-rapreproc_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-motor_run-2_echo-2_desc-rapreproc_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-1_echo-2_desc-rapreproc_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-1_echo-2_desc-rapreproc_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-1_echo-2_desc-rapreproc_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-1_echo-2_desc-rapreproc_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEt2star_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEt2star_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEt2star_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEt2star_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEte_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEte_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEte_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEte_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEtsnr_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEtsnr_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEtsnr_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_desc-combinedMEtsnr_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_echo-2_desc-rapreproc_CSFtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_echo-2_desc-rapreproc_GMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_echo-2_desc-rapreproc_WMtsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sub-001/sub-001_task-rest_run-2_echo-2_desc-rapreproc_braintsnr.tsv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/page2.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,8 +203,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/page2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="232" column="35" lean-forward="true" selection-start-line="232" selection-start-column="35" selection-end-line="232" selection-end-column="35" />
+            <state relative-caret-position="147">
+              <caret line="165" column="80" selection-start-line="165" selection-start-column="80" selection-end-line="165" selection-end-column="80" />
               <folding>
                 <element signature="e#24#58#0" expanded="true" />
               </folding>
@@ -100,6 +240,9 @@
       <find>assets</find>
       <find>style</find>
       <find>click</find>
+      <find>partici</find>
+      <find>bids</find>
+      <find>sub</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -148,11 +291,6 @@
               <item name="rt-me-fmri-dash" type="b2602c69:ProjectViewProjectNode" />
               <item name="rt-me-fmri-dash" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="rt-me-fmri-dash" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rt-me-fmri-dash" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -161,6 +299,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -168,6 +307,9 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/pages" />
     </key>
@@ -194,19 +336,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1594932456581</updated>
-      <workItem from="1594932459726" duration="19410000" />
+      <workItem from="1594932459726" duration="24284000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19410000" />
+    <option name="totallyTimeSpent" value="24284000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="719" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24959612" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24959612" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
@@ -289,8 +431,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/page2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="232" column="35" lean-forward="true" selection-start-line="232" selection-start-column="35" selection-end-line="232" selection-end-column="35" />
+        <state relative-caret-position="147">
+          <caret line="165" column="80" selection-start-line="165" selection-start-column="80" selection-end-line="165" selection-end-column="80" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>
