@@ -9,6 +9,7 @@ from app import app
 import os
 from plotly.colors import sequential, n_colors
 import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 import json
 
 # Directories
@@ -62,7 +63,7 @@ for colname, color in zip(all_subs, colors):
     i += 1
 fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
 
-# Fig 2
+# Fig 2 (A) and (B)
 sub = 'sub-001'
 fd_fn = os.path.join(data_dir, sub+'_task-all_run-all_desc-fd.tsv')
 df_fd = pd.read_csv(fd_fn, sep='\t')
@@ -77,6 +78,19 @@ for colname in cols_tasksruns:
     fig2.add_trace(go.Violin(y=data[i], line_color=sequential.Inferno[i+3], name=colname.capitalize(), orientation='v', side='positive', width=1.5, points=False, box_visible=True, meanline_visible=True))
     i += 1
 fig2.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
+
+# Fig 2B
+layout = go.Layout(title='Framewise displacement over time for all functional runs - '+sub,
+        xaxis = dict(title = 'Functional volumes'),
+        yaxis=dict(title='FD per task and run (mm)', range=[0.0, 0.5]))
+fig2b = go.Figure(layout=layout)
+i = 0
+for colname in cols_tasksruns:
+    data.append(df_fd[colname].to_numpy())
+    fig2b.add_trace(go.Scatter(y=data[i], mode='lines', line = dict(color=sequential.Inferno[i+3], width=2), name=colname.capitalize()))
+    i += 1
+fig2b.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
+
 
 
 #Fig 3
@@ -95,9 +109,7 @@ dat3 = df_WMtsnr['tsnr'].to_numpy()
 dat4 = df_CSFtsnr['tsnr'].to_numpy()
 layout = go.Layout(
         yaxis = dict(title = 'Masks'),
-        xaxis=dict(title='Temporal signal-to-noise ratio (tSNR)'),
-        # autosize=False,
-        # width=500,
+        xaxis=dict(title='Temporal signal-to-noise ratio (tSNR)', range=[-20, 250]),
         margin={
               't': 10,
             })
@@ -174,7 +186,7 @@ def reset_tsnr_imgs(sub, task, run):
     dat4 = df_CSFtsnr['tsnr'].to_numpy()
     layout = go.Layout(
             yaxis = dict(title = 'Masks'),
-            xaxis=dict(title='Temporal signal-to-noise ratio (tSNR)'),
+            xaxis=dict(title='Temporal signal-to-noise ratio (tSNR)', range=[-20, 250]),
             # autosize=False,
             # width=500,
             margin={
@@ -242,6 +254,11 @@ def render_tab_content(active_tab):
                 dbc.Row(
                     dbc.Col(
                         dcc.Graph(figure=fig2, id='fig2')
+                    )
+                ),
+                dbc.Row(
+                    dbc.Col(
+                        dcc.Graph(figure=fig2b, id='fig2')
                     )
                 ),
                 ]
