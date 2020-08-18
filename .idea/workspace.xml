@@ -3,8 +3,174 @@
   <component name="ChangeListManager">
     <list default="true" id="b4341848-747f-40ec-813d-d75b725c32ee" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsnr_distributions.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsnr_distributions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page2.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-001_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-001_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-001_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-001_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-001_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-001_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-001_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-002_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-002_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-002_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-002_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-002_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-002_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-002_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-002_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-002_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-002_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-002_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-002_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-003_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-003_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-003_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-003_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-003_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-003_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-003_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-003_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-003_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-003_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-003_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-003_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-004_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-004_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-004_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-004_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-004_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-004_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-004_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-004_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-004_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-004_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-004_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-004_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-005_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-005_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-005_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-005_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-005_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-005_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-006_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-006_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-006_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-006_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-006_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-006_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-006_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-006_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-006_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-006_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-006_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-006_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-007_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-007_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-007_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-007_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-007_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-007_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-007_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-007_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-007_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-007_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-007_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-007_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-010_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-010_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-010_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-010_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-010_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-010_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-010_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-010_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-010_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-010_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-010_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-010_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-011_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-011_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-011_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-011_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-011_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-011_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-011_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-011_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-011_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-011_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-011_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-011_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-012_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-012_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-012_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-012_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-012_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-012_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-012_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-012_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-012_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-012_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-012_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-012_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-013_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-013_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-013_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-013_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-013_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-013_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-013_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-013_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-013_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-013_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-013_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-013_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-015_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-015_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-015_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-015_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-015_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-015_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-015_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-015_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-015_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-015_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-015_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-015_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-016_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-016_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-016_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-016_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-016_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-016_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-016_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-016_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-016_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-016_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-016_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-016_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-017_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-017_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-017_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-017_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-017_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-017_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-017_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-017_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-017_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-017_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-017_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-017_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-018_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-018_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-018_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-018_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-018_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-018_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-018_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-018_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-018_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-018_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-018_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-018_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-019_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-019_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-019_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-019_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-019_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-019_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-019_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-019_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-019_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-019_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-019_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-019_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-020_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-020_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-020_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-020_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-020_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-020_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-020_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-020_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-020_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-020_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-020_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-020_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-021_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-021_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-021_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-021_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-021_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-021_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-021_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-021_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-021_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-021_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-021_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-021_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-022_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-022_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-022_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-022_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-022_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-022_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-022_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-022_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-022_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-022_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-022_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-022_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-023_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-023_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-023_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-023_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-023_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-023_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-023_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-023_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-023_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-023_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-023_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-023_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-024_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-024_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-024_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-024_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-024_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-024_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-024_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-024_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-024_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-024_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-024_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-024_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-025_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-025_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-025_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-025_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-025_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-025_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-025_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-025_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-025_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-025_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-025_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-025_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-026_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-026_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-026_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-026_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-026_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-026_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-026_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-026_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-026_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-026_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-026_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-026_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-027_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-027_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-027_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-027_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-027_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-027_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-027_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-027_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-027_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-027_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-027_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-027_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-029_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-029_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-029_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-029_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-029_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-029_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-029_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-029_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-029_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-029_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-029_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-029_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-030_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-030_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-030_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-030_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-030_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-030_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-030_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-030_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-030_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-030_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-030_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-030_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-031_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-031_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-031_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-031_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-031_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-031_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-031_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-031_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-031_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-031_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-031_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-031_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-032_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-032_task-emotion_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-032_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-032_task-emotion_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-032_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-032_task-motor_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-032_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-032_task-motor_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-032_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-032_task-rest_run-1_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sub-032_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sub-032_task-rest_run-2_echo-2_space-MNI152_desc-rapreproc_tsnr.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +183,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="56" column="116" selection-start-line="56" selection-start-column="6" selection-end-line="56" selection-end-column="116" />
+            <state relative-caret-position="450">
+              <caret line="39" selection-start-line="39" selection-end-line="46" selection-end-column="46" />
               <folding>
                 <element signature="e#118#129#0" expanded="true" />
               </folding>
@@ -29,8 +195,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="7" selection-end-column="12" />
+            <state relative-caret-position="885">
+              <caret line="65" selection-start-line="65" selection-end-line="65" selection-end-column="10" />
               <folding>
                 <element signature="e#24#58#0" expanded="true" />
               </folding>
@@ -65,8 +231,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/page2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="98" column="5" lean-forward="true" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+            <state relative-caret-position="198">
+              <caret line="198" column="15" selection-start-line="198" selection-start-column="15" selection-end-line="198" selection-end-column="15" />
               <folding>
                 <element signature="e#24#58#0" expanded="true" />
               </folding>
@@ -105,6 +271,7 @@
       <find>partici</find>
       <find>bids</find>
       <find>sub</find>
+      <find>html_</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -145,6 +312,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -156,7 +324,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -199,19 +366,21 @@
       <option name="presentableId" value="Default" />
       <updated>1594932456581</updated>
       <workItem from="1594932459726" duration="25027000" />
-      <workItem from="1597044395231" duration="3379000" />
+      <workItem from="1597044395231" duration="4921000" />
+      <workItem from="1597340936066" duration="19000" />
+      <workItem from="1597651361306" duration="2342000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28406000" />
+    <option name="totallyTimeSpent" value="32309000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="719" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2536349" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.26171243" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" />
@@ -244,8 +413,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="56" column="116" selection-start-line="56" selection-start-column="6" selection-end-line="56" selection-end-column="116" />
+        <state relative-caret-position="450">
+          <caret line="39" selection-start-line="39" selection-end-line="46" selection-end-column="46" />
           <folding>
             <element signature="e#118#129#0" expanded="true" />
           </folding>
@@ -254,8 +423,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="7" selection-end-column="12" />
+        <state relative-caret-position="885">
+          <caret line="65" selection-start-line="65" selection-end-line="65" selection-end-column="10" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>
@@ -294,8 +463,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/page2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="98" column="5" lean-forward="true" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+        <state relative-caret-position="198">
+          <caret line="198" column="15" selection-start-line="198" selection-start-column="15" selection-end-line="198" selection-end-column="15" />
           <folding>
             <element signature="e#24#58#0" expanded="true" />
           </folding>
