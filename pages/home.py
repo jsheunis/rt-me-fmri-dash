@@ -63,14 +63,18 @@ layout = html.Div([
             'textAlign': 'center',
         }
     ),
-    html.Br(),
     html.Div(
-        main_md,
+        html.Img(src="/assets/melogo3.png", width="30%"),
+        style={ 'textAlign': 'center'}
+    ),
+    html.Div([
+        main_md,],
         style={
             'marginLeft': '5%',
             'maxWidth': '90%',
         }
     ),
+
     html.Br(),
     html.Div([
         dbc.Row(
