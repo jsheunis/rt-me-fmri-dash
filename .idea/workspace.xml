@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b4341848-747f-40ec-813d-d75b725c32ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/home.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page1.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page2.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page3.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page4.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page4.py" afterDir="false" />
-    </list>
+    <list default="true" id="b4341848-747f-40ec-813d-d75b725c32ee" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,12 +224,12 @@
       <workItem from="1594932459726" duration="25027000" />
       <workItem from="1597044395231" duration="4921000" />
       <workItem from="1597340936066" duration="19000" />
-      <workItem from="1597651361306" duration="18291000" />
+      <workItem from="1597651361306" duration="18442000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48258000" />
+    <option name="totallyTimeSpent" value="48409000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="719" extended-state="0" />
