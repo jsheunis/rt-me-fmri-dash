@@ -1,20 +1,55 @@
-# rtfMRI Methods (a Dash application)
+# rt-me-fMRI - Interactive data visualization
 
-This site is an effort to make scientific data (in this case, methods implemented in real-time fMRI neurofeedback studies)
-more **standardised**, **accessible**, **interactive**, **useful** and **open**.
+This repository is contains derivative measures and interactive visualizations of the `rt-me-fMRI` dataset:
+real-time multi-echo functional magnetic resonance imaging. *more information to be added*
 
-It is currently an online companion to the research, 
-*"Quality and denoising in real-time fMRI neurofeedback: a methods review"*, done by myself ([Stephan Heunis](https://jsheunis.github.io/)) and co-authors.
-In future this framework will expand to cover not only denoising methods but also all other standard study parameters
-(e.g. clinical population, sample size, neurofeedback substrate, etc) and outcome measures (BOLD response increase, symptomatic changes, self-reports, etc.)
-The goal is also to include browsing, visualization and reporting functionalities for other modalities used in neurofeedback,
-such as fNIRS, EEG, and MEG.
+It is built with the Plotly Dash framework in an effort to make scientific data accompanying a study more **accessible**, **interactive**, **useful** and **open**.
 
-You might find these links useful:
+...
+*more information to be added*
+...
 
-- [The preprint](https://osf.io/xubhq/)
-- [The 128 studies reviewed in this work](https://www.zotero.org/groups/2320791/real-time_fmri_neurofeedback/library)
-- [The GitHub repository](https://github.com/jsheunis/quality-and-denoising-in-rtfmri-nf) for data and reproducibility aspects
+## Installation and use
 
-For questions or if you want to contribute, please feel free to contact me at j(dot)s(dot)heunis(at)tue(dot)nl.
-You are also welcome to open an issue or send a pull request on this GitHub repository.
+In order to run the app in your local browser, you will need to:
+
+- Download this GitHub repository, which contains all required code and data
+- Set up a local Python environment and install several Python packages.
+- Run the app locally
+
+## Python setup
+
+I use miniconda3 (Python 3.8) to set up my virtual environments. Once miniconda3 is installed, run the following to create a virtual environment, after inserting an appropriate environment name:
+
+```
+conda create -n [insert-environment-name-here] python
+``` 
+
+Once the environment is created, activate the environment as follows:
+
+```
+conda activate [insert-environment-name-here]
+``` 
+
+Now navigate to your extracted or cloned repository:
+
+```
+cd [path/to/folder/rt-me-fmri]
+``` 
+
+Then install the required Python packages:
+
+```
+pip install requirements.txt
+``` 
+
+## Run the app
+
+Once the environment is active and all required packages are installed, run the following from the repo directory:
+
+```
+python index.py
+``` 
+
+This should start the app, which is accessible in your browser at this address:
+[http://127.0.0.1:8050/](http://127.0.0.1:8050/)
