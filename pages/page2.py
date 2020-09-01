@@ -22,10 +22,10 @@ styles = {
 }
 
 # Directories
-data_dir = 'assets'
+data_dir = '../rt-me-fmri-data'
 
 # Filenames
-participants_fn = 'assets/participants.tsv'
+participants_fn = os.path.join(data_dir, 'participants.tsv')
 fdallsubs_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdallsubs.tsv')
 fdmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdmean.tsv')
 fdsum_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdsum.tsv')
@@ -221,7 +221,7 @@ func_vals_nooverlap = []
 
 task = 'motor'
 run = '1'
-ts_names = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE']
+ts_names = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
 ts_name = ts_names[0]
 ts_opts = [{'label': ts, 'value': ts} for ts in ts_names]
 txt = 'task-' + task + '_run-' + run
