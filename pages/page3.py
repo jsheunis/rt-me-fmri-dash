@@ -32,7 +32,6 @@ df_participants = pd.read_csv(participants_fn, sep='\t')
 all_subs = list(df_participants['participant_id'])
 tasks = ['rest', 'motor', 'emotion']
 runs = ['1', '2']
-cols_tasksruns = ['rest 1', 'motor 1', 'emotion 1', 'rest 2', 'motor 2', 'emotion 2']
 sub_opts = [{'label': sub, 'value': sub} for sub in all_subs]
 task_opts = [{'label': task.capitalize(), 'value': task} for task in tasks]
 run_opts = [{'label': 'Run '+run, 'value': run} for run in runs]
@@ -40,6 +39,16 @@ ts_names = ['t2starFIT', 'combinedMEt2starFIT', 'combinedMEte', 'combinedMEt2sta
 ts_opts = [{'label': ts, 'value': ts} for ts in ts_names]
 tasks_1stlevel = ['motor', 'emotion']
 tasks_1stlevel_opts = [{'label': task.capitalize(), 'value': task} for task in tasks_1stlevel]
+
+summary_figs = ['peak', 'mean']
+summary_fig_opts = [{'label': summary_fig.capitalize(), 'value': summary_fig} for summary_fig in summary_figs]
+
+tsnr_regions = ['whole brain', 'lmotor', 'bamygdala']
+tsnr_regions_labels = ['Whole brain', 'Left motor cortex', 'Bilateral amygdala']
+tsnr_region_opts = [{'label': tsnr_regions_labels[i], 'value': region} for i, region in enumerate(tsnr_regions)]
+
+tsnr_runs = ['all runs', 'motor_1', 'emotion_1', 'rest_2', 'motor_2', 'emotion_2']
+tsnr_run_opts = [{'label': run.capitalize(), 'value': run} for run in tsnr_runs]
 
 # -------
 # FIGURES
@@ -49,57 +58,71 @@ tasks_1stlevel_opts = [{'label': task.capitalize(), 'value': task} for task in t
 # Fig 3.1
 fig_tsnr_persub = go.Figure()
 #Fig 3.2
-layout = go.Layout(
-        yaxis = dict(title = 'Mean tSNR in gray matter', range=[0, 200]),
-        xaxis = dict(title='Time series'),
-        margin = {
-              't': 10,
-            })
-fig_tsnr_mean = go.Figure(layout=layout)
-tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-GMtsnrmean.tsv')
-df_tsnrmean = pd.read_csv(tsnrmean_fn, sep='\t')
-data2 = []
-ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-cols_tasksruns2 = ['motor_1', 'emotion_1', 'rest_2', 'motor_2', 'emotion_2']
-for x, ts in enumerate(ts_names2):
-    for c, coltaskrun in enumerate(cols_tasksruns2):
-        txt = coltaskrun + '_' + ts
-        if c == 0:
-            temp_dat = df_tsnrmean[txt].to_numpy()
-        else:
-            temp_dat = np.concatenate((temp_dat, df_tsnrmean[txt].to_numpy()))
-    data2.append(temp_dat)
-    fig_tsnr_mean.add_trace(go.Violin(y=data2[x], line_color=sequential.Inferno[3+x], name=ts, points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
-fig_tsnr_mean.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
+# layout = go.Layout(
+#         yaxis = dict(title = 'Mean tSNR in gray matter', range=[0, 200]),
+#         xaxis = dict(title='Time series'),
+#         margin = {
+#               't': 10,
+#             })
+# fig_tsnr_mean = go.Figure(layout=layout)
+# tsnr_region = 'whole brain'
+# tsnr_run = 'all runs'
+#
+# if tsnr_region == 'whole brain':
+#     tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-GMtsnrmean.tsv')
+# else:
+#     tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + tsnr_region + 'GMtsnrmean.tsv')
+#
+# df_tsnrmean = pd.read_csv(tsnrmean_fn, sep='\t')
+# data2 = []
+# ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+#
+# if tsnr_run == 'all runs':
+#     cols_tasksruns = ['motor_1', 'emotion_1', 'rest_2', 'motor_2', 'emotion_2']
+# else:
+#     cols_tasksruns = [tsnr_run]
+#
+# for x, ts in enumerate(ts_names2):
+#     for c, coltaskrun in enumerate(cols_tasksruns):
+#         txt = coltaskrun + '_' + ts
+#         if c == 0:
+#             temp_dat = df_tsnrmean[txt].to_numpy()
+#         else:
+#             temp_dat = np.concatenate((temp_dat, df_tsnrmean[txt].to_numpy()))
+#     data2.append(temp_dat)
+#     fig_tsnr_mean.add_trace(go.Violin(y=data2[x], line_color=sequential.Inferno[3+x], name=ts, points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+#
+# fig_tsnr_mean.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
 
 
-# CLUSTERS
-# Fig 3.4
+
+
+
+
+
+
+# Initialise dynamic figures
+fig_tsnr_mean = go.Figure()
 fig_clusters = go.Figure()
-
-# EFFECT SIZES
-# Fig 3.3 AND 3.6
-fig_tvals_peak = go.Figure()
-fig_effect_peak = go.Figure()
-
-# Fig 3.5
+fig_tvals_summary = go.Figure()
+fig_effect_summary = go.Figure()
 fig_tvals_persub = go.Figure()
 fig_effect_persub = go.Figure()
-
-
 fig_psc_persub = go.Figure()
 fig_psc_timeseries = go.Figure()
+fig_psc_summary = go.Figure()
 
 
+# -------------------------------------------------- #
+# -------------------------------------------------- #
+# -------------------------------------------------- #
+# -------------------------------------------------- #
+# -------------------------------------------------- #
+# -------------------------------------------------- #
 
-
-
-# -------------------------------------------------- #
-# -------------------------------------------------- #
-# -------------------------------------------------- #
-# -------------------------------------------------- #
-# -------------------------------------------------- #
-# -------------------------------------------------- #
+# ---------
+# LAYOUT
+# ---------
 
 
 layout = html.Div([
@@ -137,15 +160,55 @@ layout = html.Div([
 
 
 
-
-
-
 # ---------
 # CALLBACKS
 # ---------
 
+# TSNR PER SUB: UPDATE FIGURE
+@app.callback(
+     Output('fig_tsnr_mean', 'figure'),
+    [Input('drop_regions_tsnrsummary','value'),
+     Input('drop_runs_tsnrsummary','value')]
+)
+def reset_tsnr_summary(tsnr_region, tsnr_run):
+    layout = go.Layout(
+            yaxis = dict(title = 'Mean tSNR in gray matter', range=[0, 250]),
+            xaxis = dict(title='Time series'),
+            margin = {
+                  't': 10,
+                })
+    fig_tsnr_mean = go.Figure(layout=layout)
 
-# Callback for updating figure based on drop1, radio1, radio2 values
+    if tsnr_region == 'whole brain':
+        tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-GMtsnrmean.tsv')
+    else:
+        tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + tsnr_region + 'GMtsnrmean.tsv')
+
+    df_tsnrmean = pd.read_csv(tsnrmean_fn, sep='\t')
+    data2 = []
+    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+
+    if tsnr_run == 'all runs':
+        cols_tasksruns = ['motor_1', 'emotion_1', 'rest_2', 'motor_2', 'emotion_2']
+    else:
+        cols_tasksruns = [tsnr_run]
+
+    for x, ts in enumerate(ts_names2):
+        for c, coltaskrun in enumerate(cols_tasksruns):
+            txt = coltaskrun + '_' + ts
+            if c == 0:
+                temp_dat = df_tsnrmean[txt].to_numpy()
+            else:
+                temp_dat = np.concatenate((temp_dat, df_tsnrmean[txt].to_numpy()))
+        data2.append(temp_dat)
+        fig_tsnr_mean.add_trace(go.Violin(y=data2[x], line_color=sequential.Inferno[3+x], name=ts, points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+
+    fig_tsnr_mean.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
+
+    return fig_tsnr_mean
+
+
+# TSNR PER SUB: UPDATE FIGURE
 @app.callback(
      Output('fig_tsnr_persub', 'figure'),
     [Input('drop_subs','value'),
@@ -162,30 +225,19 @@ def reset_metsnr_imgs(sub, task, run):
               't': 10,
             })
     fig_tsnr_persub = go.Figure(layout=layout)
-
     data = []
-
     for x, ts in enumerate(ts_names):
         if x == 5:
             GMtsnr_tsv = os.path.join(data_dir, sub+'_task-'+task+'_run-'+run+'_echo-2_desc-rapreproc_GMtsnr.tsv')
         else:
             GMtsnr_tsv = os.path.join(data_dir, sub+'_task-'+task+'_run-'+run+'_desc-' + ts + '_GMtsnr.tsv')
-
         df_GMtsnr = pd.read_csv(GMtsnr_tsv, sep='\t').dropna()
-
         new_dat = df_GMtsnr['tsnr'].to_numpy()
-
         if x == 0:
             new_dat[new_dat < 0] = math.nan
             new_dat[new_dat > 500] = math.nan
-
         data.append(new_dat)
         fig_tsnr_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Inferno[8-x], name=ts, points=False))
-
-        # if x == 0:
-        #     fig_tsnr_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Inferno[3+x], name=ts, points='all'))
-        # else:
-        #     fig_tsnr_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Inferno[3+x], name=ts, points=False))
 
     fig_tsnr_persub.update_traces(orientation='h', side='positive', width=2, box_visible=True, meanline_visible=True)
     fig_tsnr_persub.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, legend={'traceorder':'reversed'})
@@ -194,7 +246,7 @@ def reset_metsnr_imgs(sub, task, run):
 
 
 
-# Callback for updating run values
+# TSNR PER SUB: UPDATE RADIO BUTTONS
 @app.callback(
      [Output('radio_runs_tsnr', 'options'),
       Output('radio_runs_tsnr', 'value')],
@@ -221,7 +273,44 @@ def reset_metsnr_imgs(task, run):
 
 
 
-# Callback for updating figure based on drop2... values
+# T-VALUES SUMMARY: UPDATE FIGURE
+@app.callback(
+     Output('fig_tvals_summary', 'figure'),
+    [Input('radio_tasks_tvalsummary','value'),
+     Input('radio_runs_tvalsummary','value'),
+     Input('drop_opts_tvalsummary','value')]
+)
+def reset_tval_summary_img(task, run, summary_opt):
+    layout = go.Layout(
+        yaxis = dict(title = 'T-values', range=[0, 40]),
+        xaxis = dict(title='Time series'),
+        margin = {
+              't': 10,
+            })
+    fig_tvals_summary = go.Figure(layout=layout)
+
+    tval_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + summary_opt + 'Tvalues.tsv')
+    df_tval = pd.read_csv(tval_fn, sep='\t')
+    data = []
+    # ts_names3 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+    ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
+    taskrun = task + '_' + run
+
+    # only use FWE: ts_names3[0::2]
+    for x, ts in enumerate(ts_names3[0::2]):
+        txt = taskrun + '_' + ts
+        temp_dat = df_tval[txt].to_numpy()
+        data.append(temp_dat)
+        fig_tvals_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+
+    fig_tvals_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
+
+    return fig_tvals_summary
+
+
+
+# T-VALUES PER SUB: UPDATE FIGURE
 @app.callback(
      Output('fig_tvals_persub', 'figure'),
     [Input('drop_subs_tvals','value'),
@@ -259,59 +348,30 @@ def reset_tval_imgs(sub, task, run):
 
 
 
-# Callback for updating figure based on drop2... values
+
+
+
+
+# EFFECT SIZES SUMMARY: UPDATE FIGURE
 @app.callback(
-     Output('fig_tvals_peak', 'figure'),
-    [Input('radio_tasks_tvalpeak','value'),
-     Input('radio_runs_tvalpeak','value')]
+     Output('fig_effect_summary', 'figure'),
+    [Input('radio_tasks_effectsummary','value'),
+     Input('radio_runs_effectsummary','value'),
+     Input('drop_opts_effectsummary','value')]
 )
-def reset_tval_peak_img(task, run):
+def reset_effect_summary_img(task, run, summary_opt):
     layout = go.Layout(
-        yaxis = dict(title = 'Peak T-values', range=[0, 40]),
-        xaxis = dict(title='Time series'),
-        margin = {
-              't': 10,
-            })
-    fig_tvals_peak = go.Figure(layout=layout)
-
-    tvalpeak_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-peakTvalues.tsv')
-    df_tvalpeak = pd.read_csv(tvalpeak_fn, sep='\t')
-    data_peak = []
-    # ts_names3 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
-    taskrun = task + '_' + run
-
-    # only use FWE: ts_names3[0::2]
-    for x, ts in enumerate(ts_names3[0::2]):
-        txt = taskrun + '_' + ts
-        temp_dat_peak = df_tvalpeak[txt].to_numpy()
-        data_peak.append(temp_dat_peak)
-        fig_tvals_peak.add_trace(go.Violin(y=data_peak[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
-
-    fig_tvals_peak.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
-
-    return fig_tvals_peak
-
-
-
-# Callback for updating figure based on drop2... values
-@app.callback(
-     Output('fig_effect_peak', 'figure'),
-    [Input('radio_tasks_effectpeak','value'),
-     Input('radio_runs_effectpeak','value')]
-)
-def reset_effect_peak_img(task, run):
-    layout = go.Layout(
-            yaxis = dict(title = 'Peak contrast values'),
+            yaxis = dict(title = 'Effect size'),
             xaxis = dict(title='Time series'),
             margin = {
                   't': 10,
                 })
-    fig_effect_peak = go.Figure(layout=layout)
-    cvalpeak_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-peakConvalues.tsv')
-    df_cvalpeak = pd.read_csv(cvalpeak_fn, sep='\t')
-    data_peakCon = []
+    fig_effect_summary = go.Figure(layout=layout)
+
+    cval_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + summary_opt +'Cvalues.tsv')
+
+    df_cval = pd.read_csv(cval_fn, sep='\t')
+    data = []
     ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
     ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
     taskrun = task + '_' + run
@@ -319,16 +379,15 @@ def reset_effect_peak_img(task, run):
     # only use FWE: ts_names3[0::2]
     for x, ts in enumerate(ts_names3[0::2]):
         txt = taskrun + '_' + ts
-        temp_dat_peakCon = df_cvalpeak[txt].to_numpy()
-        data_peakCon.append(temp_dat_peakCon)
-        fig_effect_peak.add_trace(go.Violin(y=data_peakCon[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
-    fig_effect_peak.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
-    return fig_effect_peak
+        temp_dat = df_cval[txt].to_numpy()
+        data.append(temp_dat)
+        fig_effect_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+    fig_effect_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
+    return fig_effect_summary
 
 
 
-
-# Callback for updating figure based on drop2... values
+# EFFECT SIZES PER SUBJECT: UPDATE FIGURE
 @app.callback(
      Output('fig_effect_persub', 'figure'),
     [Input('drop_subs_effect','value'),
@@ -366,7 +425,42 @@ def reset_contrast_imgs(sub, task, run):
 
 
 
-# Callback for updating figure based on drop2... values
+# PERCENTAGE SIGNAL CHANGE SUMMARY: UPDATE FIGURE
+@app.callback(
+     Output('fig_psc_summary', 'figure'),
+    [Input('radio_tasks_pscsummary','value'),
+     Input('radio_runs_pscsummary','value'),
+     Input('drop_opts_pscsummary','value')]
+)
+def reset_psc_summary_img(task, run, summary_opt):
+    layout = go.Layout(
+            yaxis = dict(title = 'Precentage signal change'),
+            xaxis = dict(title='Time series'),
+            margin = {
+                  't': 10,
+                })
+    fig_psc_summary = go.Figure(layout=layout)
+
+    psc_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + summary_opt +'PSCvalues.tsv')
+
+    df_psc = pd.read_csv(psc_fn, sep='\t')
+    data = []
+    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+    ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
+    taskrun = task + '_' + run
+
+    # only use FWE: ts_names3[0::2]
+    for x, ts in enumerate(ts_names3[0::2]):
+        txt = taskrun + '_' + ts
+        temp_dat = df_psc[txt].to_numpy()
+        data.append(temp_dat)
+        fig_psc_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+    fig_psc_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
+    return fig_psc_summary
+
+
+
+# PERCENTAGE SIGNAL CHANGE PER SUBJECT: UPDATE FIGURES
 @app.callback(
     [Output('fig_psc_persub', 'figure'),
      Output('fig_psc_timeseries', 'figure')],
@@ -398,7 +492,6 @@ def reset_psc_imgs(sub, task, run):
     fig_psc_persub.update_traces(orientation='h', side='positive', width=2, box_visible=True, meanline_visible=True)
     fig_psc_persub.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, legend={'traceorder':'reversed'})
 
-
     layout = go.Layout(
         yaxis = dict(title = 'Percentage signal change', range=[-2, 2]),
         xaxis=dict(title='Time (functional volumes)'),
@@ -413,19 +506,16 @@ def reset_psc_imgs(sub, task, run):
     data_pscts = []
     for i, colname in enumerate(ts_names4):
         data_pscts.append(df_psc_ts[colname].to_numpy())
-        fig_psc_timeseries.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=sequential.Viridis[8-i], width=2), name=colname ))
+        fig_psc_timeseries.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=sequential.Viridis[3+i], width=2), name=ts_names2[i] ))
         fig_psc_timeseries.update_yaxes(showticklabels=True)
 
-    fig_psc_timeseries.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, legend={'traceorder':'reversed'})
-    # fig2b.update_layout(xaxis_showgrid=False, xaxis_zeroline=False,
-    #                     title='Framewise displacement over time for all functional runs - '+selected_sub)
-
+    fig_psc_timeseries.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False)
 
     return [fig_psc_persub, fig_psc_timeseries]
 
 
 
-# Callback for updating figure based on drop2... values
+# CLUSTERS: UPDATE FIGURE
 @app.callback(
      Output('fig_clusters', 'figure'),
     [Input('radio_tasks_clusters','value'),
@@ -461,22 +551,22 @@ def reset_cluster_img(task, run):
     Output("example-output", "children"),
     [Input("example-button", "n_clicks"),
      Input('fig_tsnr_mean', 'figure'),
-     Input('fig_tvals_peak', 'figure'),
+     Input('fig_tvals_summary', 'figure'),
      Input('fig_clusters', 'figure')]
 )
-def on_button_click(n, fig_tsnr_mean, fig_tvals_peak, fig_clusters):
+def on_button_click(n, fig_tsnr_mean, fig_tvals_summary, fig_clusters):
     if n is None:
         return "Not clicked."
     else:
         write_html(fig_tsnr_mean, os.path.join(data_dir, 'fig_tsnr_mean.html'))
-        write_html(fig_tvals_peak, os.path.join(data_dir, 'fig_tvals_peak.html'))
+        write_html(fig_tvals_summary, os.path.join(data_dir, 'fig_tvals_summary.html'))
         write_html(fig_clusters, os.path.join(data_dir, 'fig_clusters.html'))
         return f"{n}"
 
 
 
 
-
+# UPDATE PAGE 3 LAYOUT BASED ON TAB SELECTION
 @app.callback(
     Output("tab-content-page3", "children"),
     [Input("tabs-page3", "active_tab")],
@@ -487,28 +577,63 @@ def render_tab_content_page3(active_tab):
     stored graphs, and renders the tab content depending on what the value of
     'active_tab' is.
     """
-    main_md1 = dcc.Markdown('''
-    Temporal signal-to-noise ratios (tSNR) were calculated for the single echo time series (echo 2), all of the combined time series (x4), and the T2*-FIT time series.
-    The distribution of mean tSNR in gray matter is shown below, per time series, for all runs of all participants (excluding the template run, i.e. Rest run 1) 
+    md_tsnr_1 = dcc.Markdown('''
+    Whole brain temporal signal-to-noise ratios (tSNR) were calculated for the single echo time series (echo 2), for all of the combined time series (x4), and for the T2*-FIT time series.
+    The distribution of mean tSNR in gray matter is shown below, per time series, for all runs of all participants (excluding the template run, i.e. excluding Rest run 1) 
     ''')
 
-    main_md2 = dcc.Markdown('''
-    To get a more representative picture of the distribution of tSNR values for the various time series,
+    md_tsnr_2 = dcc.Markdown('''
+    To get a more representative view of the distribution of tSNR values for the various time series,
     the inputs below can be used to view tSNR per participant, task, and run.
     ''')
 
-    main_md3 = dcc.Markdown('''
-    Cluster sizes, i.e. amount of voxels, after thresholding (FWE, p < 0.05, extent threshold = 0) of statistical maps that were derived from 1st level analysis of all time series.
+    md_cluster_1 = dcc.Markdown('''
+    1st level analysis was done on all 6 time series per task and run (i.e. 6x4).
+    After thresholding (FWE, p < 0.05, extent threshold = 0) of the resulting statistical maps, surviving cluster sizes were calculated in terms of the number of voxels.
+    These are shown below per task and run. 
     ''')
 
+    md_tval_1 = dcc.Markdown(''' 
+    ''')
+
+    md_tval_2 = dcc.Markdown(''' 
+    ''')
+
+    md_effectsize_1 = dcc.Markdown(''' 
+    ''')
+
+    md_psc_1 = dcc.Markdown(''' 
+    ''')
 
     if active_tab is not None:
         if active_tab == "tsnr-page3":
             return [
                 html.H2('tSNR in gray matter', style={'textAlign': 'center'}),
                 html.H5('Mean tSNR'),
-                main_md1,
+                md_tsnr_1,
                 html.Br([]),
+                dbc.Row([
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_regions_tsnrsummary',
+                                options=tsnr_region_opts,
+                                value='whole brain',
+                            )
+                            ],
+                        )),
+                    ], width={"size": 3, "offset": 2}),
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_runs_tsnrsummary',
+                                options=tsnr_run_opts,
+                                value='all runs',
+                            )
+                            ],
+                        )),
+                    ], width={"size": 2, "offset": 2}),
+                ]),
                 dbc.Row([
                     dbc.Col([
 
@@ -521,7 +646,7 @@ def render_tab_content_page3(active_tab):
 
                 ]),
                 html.H5('tSNR distributions'),
-                main_md2,
+                md_tsnr_2,
                 html.Br([]),
                 dbc.Row([
                     dbc.Col([
@@ -568,7 +693,7 @@ def render_tab_content_page3(active_tab):
             return [
                 html.H2('1st level task cluster sizes', style={'textAlign': 'center'}),
                 html.Br([]),
-                main_md3,
+                md_cluster_1,
                 html.Br([]),
                 dbc.Row([
                     dbc.Col([
@@ -610,37 +735,49 @@ def render_tab_content_page3(active_tab):
             return [
                 html.H2('T-values in task clusters', style={'textAlign': 'center'}),
                 html.Br([]),
-                main_md1,
+                md_tval_1,
                 html.Br([]),
-                html.H5('Peak T-values'),
+                html.H5('T-value summary'),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
-                            # dbc.Label('Task'),
-                            dbc.RadioItems(
-                                options=tasks_1stlevel_opts,
-                                value='motor',
-                                id="radio_tasks_tvalpeak",
-                                inline=True,
-                            )],
+                            dcc.Dropdown(
+                                id='drop_opts_tvalsummary',
+                                options=summary_fig_opts,
+                                value='peak',
+                            )
+                            ],
                         )),
-                    ], width={"size": 4, "offset": 2}),
+                    ], width={"size": 2, "offset": 1}),
                     dbc.Col([
-                        dbc.Row(dbc.Col([
-                            # dbc.Label('Run'),
-                            dbc.RadioItems(
-                                options=run_opts,
-                                value='1',
-                                id="radio_runs_tvalpeak",
-                                inline=True,
-                            )],
-                        )),
-                    ], width={"size": 5, "offset": 1}),
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=tasks_1stlevel_opts,
+                                    value='motor',
+                                    id="radio_tasks_tvalsummary",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 2, "offset": 1}),
+                    dbc.Col([
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=run_opts,
+                                    value='1',
+                                    id="radio_runs_tvalsummary",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 2, "offset": 1}),
                 ]),
                 dbc.Row([
                     dbc.Col([
 
-                        dcc.Graph(figure=fig_tvals_peak, id='fig_tvals_peak')],
+                        dcc.Graph(figure=fig_tvals_summary, id='fig_tvals_summary')],
                         style={
                             'textAlign': 'left',
                         },
@@ -650,7 +787,7 @@ def render_tab_content_page3(active_tab):
                 ]),
                 html.Br([]),
                 html.H5('T-value distributions'),
-                main_md3,
+                md_tval_2,
                 html.Br([]),
                 dbc.Row([
                     dbc.Col([
@@ -697,37 +834,49 @@ def render_tab_content_page3(active_tab):
             return [
                 html.H2('Effect sizes in task clusters', style={'textAlign': 'center'}),
                 html.Br([]),
-                main_md3,
+                md_effectsize_1,
                 html.Br([]),
-                html.H5('Peak effect sizes'),
+                html.H5('Effect size summary'),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
-                            # dbc.Label('Task'),
-                            dbc.RadioItems(
-                                options=tasks_1stlevel_opts,
-                                value='motor',
-                                id="radio_tasks_effectpeak",
-                                inline=True,
-                            )],
+                            dcc.Dropdown(
+                                id='drop_opts_effectsummary',
+                                options=summary_fig_opts,
+                                value='peak',
+                            )
+                            ],
                         )),
-                    ], width={"size": 4, "offset": 2}),
+                    ], width={"size": 2, "offset": 1}),
                     dbc.Col([
-                        dbc.Row(dbc.Col([
-                            # dbc.Label('Run'),
-                            dbc.RadioItems(
-                                options=run_opts,
-                                value='1',
-                                id="radio_runs_effectpeak",
-                                inline=True,
-                            )],
-                        )),
-                    ], width={"size": 5, "offset": 1}),
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=tasks_1stlevel_opts,
+                                    value='motor',
+                                    id="radio_tasks_effectsummary",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 2, "offset": 1}),
+                    dbc.Col([
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=run_opts,
+                                    value='1',
+                                    id="radio_runs_effectsummary",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 2, "offset": 1}),
                 ]),
                 dbc.Row([
                     dbc.Col([
 
-                        dcc.Graph(figure=fig_effect_peak, id='fig_effect_peak')],
+                        dcc.Graph(figure=fig_effect_summary, id='fig_effect_summary')],
                         style={
                             'textAlign': 'left',
                         },
@@ -781,44 +930,56 @@ def render_tab_content_page3(active_tab):
             return [
                 html.H2('PSC in task clusters', style={'textAlign': 'center'}),
                 html.Br([]),
-                main_md3,
+                md_psc_1,
                 html.Br([]),
-                # html.H5('Peak effect sizes'),
-                # dbc.Row([
-                #     dbc.Col([
-                #         dbc.Row(dbc.Col([
-                #             # dbc.Label('Task'),
-                #             dbc.RadioItems(
-                #                 options=tasks_1stlevel_opts,
-                #                 value='motor',
-                #                 id="radio_tasks_effectpeak",
-                #                 inline=True,
-                #             )],
-                #         )),
-                #     ], width={"size": 4, "offset": 2}),
-                #     dbc.Col([
-                #         dbc.Row(dbc.Col([
-                #             # dbc.Label('Run'),
-                #             dbc.RadioItems(
-                #                 options=run_opts,
-                #                 value='1',
-                #                 id="radio_runs_effectpeak",
-                #                 inline=True,
-                #             )],
-                #         )),
-                #     ], width={"size": 5, "offset": 1}),
-                # ]),
-                # dbc.Row([
-                #     dbc.Col([
-                #
-                #         dcc.Graph(figure=fig_effect_peak, id='fig_effect_peak')],
-                #         style={
-                #             'textAlign': 'left',
-                #         },
-                #         width={"size": 12, "offset": 0}
-                #     ),
-                #
-                # ]),
+                html.H5('PSC summary'),
+                dbc.Row([
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_opts_pscsummary',
+                                options=summary_fig_opts,
+                                value='peak',
+                            )
+                            ],
+                        )),
+                    ], width={"size": 2, "offset": 1}),
+                    dbc.Col([
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=tasks_1stlevel_opts,
+                                    value='motor',
+                                    id="radio_tasks_pscsummary",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 2, "offset": 1}),
+                    dbc.Col([
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=run_opts,
+                                    value='1',
+                                    id="radio_runs_pscsummary",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 2, "offset": 1}),
+                ]),
+                dbc.Row([
+                    dbc.Col([
+
+                        dcc.Graph(figure=fig_psc_summary, id='fig_psc_summary')],
+                        style={
+                            'textAlign': 'left',
+                        },
+                        width={"size": 12, "offset": 0}
+                    ),
+
+                ]),
                 html.H5('PSC distributions'),
                 dbc.Row([
                     dbc.Col([
