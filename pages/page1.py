@@ -38,8 +38,12 @@ layout = html.Div([
             ),
             html.Div([
                 main_md,
-                html.Img(src="/assets/data_descriptor.png", width="100%"),
-                html.Br([]),
+                html.Div([
+                    html.Img(src="/assets/data_descriptor.png", width="85%"),],
+                    style={
+                        'textAlign': 'center'
+                    }
+                ),
                 html.Br([]),
                 main_md2,
                 ],

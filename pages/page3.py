@@ -91,7 +91,7 @@ layout = html.Div([
             [
                 dbc.Tab(label="Methods", tab_id="me-methods"),
                 dbc.Tab(label="tSNR", tab_id="tsnr-page3"),
-                dbc.Tab(label="1st-level clusters", tab_id="clusters"),
+                dbc.Tab(label="Task regions", tab_id="clusters"),
                 dbc.Tab(label="Contrast values", tab_id="cvals"),
                 dbc.Tab(label="T-statistic values", tab_id="tvals"),
                 dbc.Tab(label="Perc. signal change", tab_id="pscvals"),
@@ -274,9 +274,10 @@ def reset_tval_summary_img(task, run, summary_opt, cluster_opt):
      Output('fig_tvals_persub', 'figure'),
     [Input('drop_subs_tvals','value'),
      Input('radio_tasks_tvals','value'),
-     Input('radio_runs_tvals','value')]
+     Input('radio_runs_tvals','value'),
+     Input('drop_clusteropts_tvals','value')]
 )
-def reset_tval_imgs(sub, task, run):
+def reset_tval_imgs(sub, task, run, cluster_opt):
 
     layout = go.Layout(
         yaxis = dict(title = 'Time series'),
@@ -289,13 +290,13 @@ def reset_tval_imgs(sub, task, run):
     data = []
     ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
     ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
+    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
     tval_fn = os.path.join(data_dir, sub+'_task-'+task+'_run-'+run+'_desc-tmapvalues.tsv')
     df_tvals = pd.read_csv(tval_fn, sep='\t')
 
-    for x, ts in enumerate(ts_names3[-2::-2]):
-
-
-        new_dat = df_tvals[ts].dropna().to_numpy()
+    for x, ts in enumerate(ts_colnames[::-1]):
+        txt = ts + '_' + cluster_opt
+        new_dat = df_tvals[txt].dropna().to_numpy()
 
         data.append(new_dat)
         fig_tvals_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Viridis[8-x], name=ts_names2[5-x], points=False))
@@ -350,9 +351,10 @@ def reset_effect_summary_img(task, run, summary_opt, cluster_opt):
      Output('fig_effect_persub', 'figure'),
     [Input('drop_subs_effect','value'),
      Input('radio_tasks_effect','value'),
-     Input('radio_runs_effect','value')]
+     Input('radio_runs_effect','value'),
+     Input('drop_clusteropts_effect','value')]
 )
-def reset_contrast_imgs(sub, task, run):
+def reset_contrast_imgs(sub, task, run, cluster_opt):
 
     layout = go.Layout(
         yaxis = dict(title = 'Time series'),
@@ -363,15 +365,15 @@ def reset_contrast_imgs(sub, task, run):
     fig_effect_persub = go.Figure(layout=layout)
 
     data = []
+    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
     ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
     ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
     cval_fn = os.path.join(data_dir, sub+'_task-'+task+'_run-'+run+'_desc-cmapvalues.tsv')
     df_cvals = pd.read_csv(cval_fn, sep='\t')
 
-    for x, ts in enumerate(ts_names3[-2::-2]):
-
-
-        new_dat = df_cvals[ts].dropna().to_numpy()
+    for x, ts in enumerate(ts_colnames[::-1]):
+        txt = ts + '_' + cluster_opt
+        new_dat = df_cvals[txt].dropna().to_numpy()
 
         data.append(new_dat)
         fig_effect_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Viridis[8-x], name=ts_names2[5-x], points=False))
@@ -540,45 +542,92 @@ def render_tab_content_page3(active_tab):
     'active_tab' is.
     """
     md_tsnr_1 = dcc.Markdown('''
-    Whole brain temporal signal-to-noise ratios (tSNR) were calculated for the single echo time series (echo 2), for all of the combined time series (x4), and for the T2*-FIT time series.
-    The distribution of mean tSNR in gray matter is shown below, per time series, for all runs of all participants (excluding the template run, i.e. excluding Rest run 1) 
+    Whole brain temporal signal-to-noise ratios (tSNR) were calculated for all 6 time series, i.e.:
+    - the single echo time series (echo 2),
+    - all of the combined time series (x4),
+    - and the T2\*-FIT time series.
+    The distribution of mean tSNR in gray matter is shown below, per time series, for all runs of all participants (excluding the template run)
+    
+    The regions (whole brain, amygdala, motor cortex) and the runs (All runs, or individual runs) can be selected from the respective dropdowns to update the figure. 
     ''')
 
     md_tsnr_2 = dcc.Markdown('''
     To get a more representative view of the distribution of tSNR values for the various time series,
-    the inputs below can be used to view tSNR per participant, task, and run.
+    the inputs below can be used to view whole brain gray matter tSNR per participant, task, and run.
     ''')
 
     md_cluster_1 = dcc.Markdown('''
-    1st level analysis was done on all 6 time series per task and run (i.e. 6x4).
-    After thresholding (FWE, p < 0.05, extent threshold = 0) of the resulting statistical maps, surviving cluster sizes were calculated in terms of the number of voxels.
-    These are shown below per task and run. 
+    1st level analysis was done on all 6 time series, per task and per run (i.e. 6x2x2 = 24 times).
+    After thresholding of the resulting statistical maps (FWE, p < 0.05, extent threshold = 0), surviving cluster sizes were calculated in terms of the number of voxels.
+    These are shown below per task and run (use the radio buttons to switch between the options).  
     ''')
 
-    md_tval_1 = dcc.Markdown(''' 
+    md_cluster_2 = dcc.Markdown('''
+    Several other clusters / regions were prepared within which the statistical values and other results of the multi-echo time series are calculated and compared.
+    The abovementioned thresholding of the statistical maps resulting from 1st-level analysis is shortened as `Task (FWE)`.
+    A less stringent threshold was also applied (no FWE, p < 0.001, 20 voxel extent threshold) and was shortened `Task (noFWE)`.
+    The anatomical ROI derived from an atlas-based region (from the Jülich atlas) mapped to the subject functional space is called `Atlas-based`.
+    Then, the FWE thresholded cluster images from all 6 time series were combined using both a logical AND and a logical OR.
+    These are shortened as `All TS task (AND)` and `All TS task (OR)` respectively. 
+    
     ''')
 
-    md_tval_2 = dcc.Markdown(''' 
+    md_tval_1 = dcc.Markdown('''
+    T-statistic values resulting from 1st-level analysis, and corresponding to the contrast values, were extracted for each of the 6 time series within the defined regions/clusters.
+    The peak and mean values were calculated. This was done for all tasks and runs (2x2). 
+    Below, the dropdowns and radio buttons can be used to update the figure.
+    For a detailed explanation of the options in the task region dropdown, see the bottom of the "Task regions" tab page.
+      
     ''')
 
-    md_effectsize_1 = dcc.Markdown(''' 
+    md_tval_2 = dcc.Markdown('''
+    Here you can view the T-value distributions (within a selected region) of all time series per subject, task, and run.
     ''')
 
-    md_psc_1 = dcc.Markdown(''' 
+    md_effectsize_1 = dcc.Markdown('''
+    Contrast values (no units) resulting from 1st-level analysis were extracted for each of the 6 time series within the defined regions/clusters.
+    The peak and mean values were calculated. This was done for all tasks and runs (2x2). 
+    Below, the dropdowns and radio buttons can be used to update the figure.
+    For a detailed explanation of the options in the task region dropdown, see the bottom of the "Task regions" tab page.
     ''')
 
-    md_methods_1 = dcc.Markdown(''' Below, we give an overview of the main concepts and analysis steps that are followed to generate the main results for this work:  
+    md_effectsize_2 = dcc.Markdown('''
+    Here you can view the contrast value distributions (within a selected region) of all time series per subject, task, and run. 
+    ''')
+
+    md_psc_1 = dcc.Markdown('''
+    Contrast values (no units) resulting from 1st-level analysis were extracted for each of the 6 time series within the defined regions/clusters.
+    These were converted to percentage signal change (PSC) in order to provide a standardised effect size measure ([method described here](http://www.sbirc.ed.ac.uk/cyril/bold_percentage/BOLD_percentage.html)).
+    The peak and mean values were then calculated. This was done for all tasks and runs (2x2). 
+    Below, the dropdowns and radio buttons can be used to update the figure.
+    For a detailed explanation of the options in the task region dropdown, see the bottom of the "Task regions" tab page.
+    ''')
+
+    md_psc_2 = dcc.Markdown('''
+    Here you can view the percentage signal change distributions (within a selected region) of all time series per subject, task, run.
+    ''')
+
+    md_psc_3 = dcc.Markdown('''
+    For the same subject, task, run, and region/cluster selected above, this figure shows the 6 time series in terms of percentage signal change.
+    This percentage signal change was calculated per voxel and time point with regards to the particular time series mean,
+    and then averaged over all voxels within each selected region respectively.   
+    ''')
+
+    md_methods_1 = dcc.Markdown('''
+    Below is an overview of the main concepts and analysis steps that are followed to generate the main results for this work:
     - Echo combination for signal recovery
     - Echo combination weights
     - Combining multi-echo data
     - Comparing the resulting timeseries
+    
+    The measures resulting from these analysis steps can be explored using the various tabs on this page (tSNR, 1st-level clusters, etc)
     ''')
 
     md_methods_2 = dcc.Markdown('''One of the main known uses and benefits of multi-echo fMRI is echo-combination for signal recovery in areas of dropout.
     In a standard single-echo fMRI sequence, each volume is acquired at an echo time (after transverse excitation) that is optimized for the best whole brain contrast,
     which is close to the average T2\* value of whole brain grey matter.
     This results in sub-optimal region-specific contrasts due to the fact that T2\* varies across the brain, roughly as a function of local tissue type.
-    By acquiring multiple images along the signal decay curve, one can use a simplified Bloch-equation to estiate local signal decay parameters,
+    By acquiring multiple images along the signal decay curve, one can use a simplified Bloch-equation to estimate local signal decay parameters,
     which can in turn be used as weighting factors in a multi-echo combination procedure.
     This can yield combined fMRI data with less signal dropout and improved local BOLD sensitivity.
     ''')
@@ -759,8 +808,8 @@ def render_tab_content_page3(active_tab):
                 ]
         elif active_tab == "clusters":
             return [
-                html.H2('1st level task cluster sizes', style={'textAlign': 'center'}),
-                html.Br([]),
+                html.H2('Task regions and sizes', style={'textAlign': 'center'}),
+                html.H5('1st-level cluster sizes'),
                 md_cluster_1,
                 html.Br([]),
                 dbc.Row([
@@ -798,14 +847,15 @@ def render_tab_content_page3(active_tab):
                     ),
 
                 ]),
+                html.H5('Clusters/regions for comparisons'),
+                md_cluster_2,
                 ]
         elif active_tab == "tvals":
             return [
-                html.H2('T-values in task clusters', style={'textAlign': 'center'}),
-                html.Br([]),
+                html.H2('T-statistic values', style={'textAlign': 'center'}),
+                html.H5('T-statistic summary'),
                 md_tval_1,
                 html.Br([]),
-                html.H5('T-value summary'),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
@@ -864,7 +914,7 @@ def render_tab_content_page3(active_tab):
 
                 ]),
                 html.Br([]),
-                html.H5('T-value distributions'),
+                html.H5('T-statistic distributions'),
                 md_tval_2,
                 html.Br([]),
                 dbc.Row([
@@ -897,6 +947,14 @@ def render_tab_content_page3(active_tab):
                                 inline=True,
                             )],
                         )),
+                        html.Br([]),
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_clusteropts_tvals',
+                                options=clusters_opts,
+                                value='FWE',
+                            )],
+                        )),
                     ], width={"size": 3, "offset": 0}),
                     dbc.Col([
 
@@ -910,11 +968,10 @@ def render_tab_content_page3(active_tab):
                 ]
         elif active_tab == "cvals":
             return [
-                html.H2('Effect sizes in task clusters', style={'textAlign': 'center'}),
-                html.Br([]),
+                html.H2('Contrast values', style={'textAlign': 'center'}),
+                html.H5('Contrast value summary'),
                 md_effectsize_1,
                 html.Br([]),
-                html.H5('Effect size summary'),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
@@ -972,7 +1029,9 @@ def render_tab_content_page3(active_tab):
                     ),
 
                 ]),
-                html.H5('Effect size distributions'),
+                html.H5('Contrast value distributions'),
+                md_effectsize_2,
+                html.Br([]),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
@@ -1003,6 +1062,14 @@ def render_tab_content_page3(active_tab):
                                 inline=True,
                             )],
                         )),
+                        html.Br([]),
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_clusteropts_effect',
+                                options=clusters_opts,
+                                value='FWE',
+                            )],
+                        )),
                     ], width={"size": 3, "offset": 0}),
                     dbc.Col([
 
@@ -1016,11 +1083,10 @@ def render_tab_content_page3(active_tab):
             ]
         elif active_tab == "pscvals":
             return [
-                html.H2('PSC summary in selected cluster/ROI', style={'textAlign': 'center'}),
-                html.Br([]),
+                html.H2('Percentage signal change', style={'textAlign': 'center'}),
+                html.H5('PSC summary'),
                 md_psc_1,
                 html.Br([]),
-                html.H5('PSC summary'),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
@@ -1079,6 +1145,8 @@ def render_tab_content_page3(active_tab):
 
                 ]),
                 html.H5('PSC distributions in selected cluster/ROI'),
+                md_psc_2,
+                html.Br([]),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
@@ -1111,7 +1179,6 @@ def render_tab_content_page3(active_tab):
                         )),
                         html.Br([]),
                         dbc.Row(dbc.Col([
-                            # dbc.Label('Participant'),
                             dcc.Dropdown(
                                 id='drop_clusteropts_psc',
                                 options=clusters_opts,
@@ -1129,6 +1196,8 @@ def render_tab_content_page3(active_tab):
                     ),
                 ]),
                 html.H5('PSC time series in selected cluster/ROI'),
+                md_psc_3,
+                html.Br([]),
                 dbc.Row([
                     dbc.Col([
 

@@ -37,8 +37,8 @@ Unzip the file and place the `rt-me-fmri-data` directory with all its contents i
 ## 3. Python setup
 
 The Dash app requires several Python packages to be installed.
-It is highly recommended to set up a virtual environment in order to manage the Python environment and in which to install required packages.
-Instructions for miniconda3 (Python 3.8) are given here, but you are free to use whichever virtual environment manager you prefer.
+It is highly recommended to set up a virtual environment in order to manage the Python setup and required packages.
+Instructions for [miniconda3 (Python 3.8)](https://docs.conda.io/en/latest/miniconda.html) are given here, but you are free to use whichever virtual environment manager you prefer.
 
 Once miniconda3 is installed, run the following from your terminal to create a virtual Python environment.
 Remember to first insert an appropriate environment name:
@@ -59,15 +59,15 @@ Now navigate to your extracted or cloned `rt-me-fmri-dash` directory:
 cd [path/to/directory/rt-me-fmri-dash]
 ``` 
 
-Then install the required Python packages as follows:
+Then install the required Python packages with `pip` as follows:
 
 ```
 pip install requirements.txt
 ``` 
 
-## Run the app
+## 4. Run the app
 
-Once the environment is active and all required packages are installed, run the following from the `rt-me-fmri-dash` directory:
+Once the `conda` environment is active and all required packages are installed, run the following from the `rt-me-fmri-dash` directory:
 
 ```
 python index.py
