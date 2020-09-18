@@ -50,58 +50,17 @@ tsnr_region_opts = [{'label': tsnr_regions_labels[i], 'value': region} for i, re
 tsnr_runs = ['all runs', 'motor_1', 'emotion_1', 'rest_2', 'motor_2', 'emotion_2']
 tsnr_run_opts = [{'label': run.capitalize(), 'value': run} for run in tsnr_runs]
 
+clusters = ['FWE', 'noFWE', 'anatROI', 'fweAND', 'fweOR']
+cluster_names = ['Task (FWE)', 'Task (noFWE)', 'Atlas-based', 'All TS task (AND)', 'All TS task (OR)']
+clusters_opts = [{'label': cluster_names[i], 'value': c} for i, c in enumerate(clusters)]
+
+# echo_colnames = {'echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit'};
+# cluster_colnames = {'FWE', 'noFWE', 'anatROI', 'fweAND', 'fweOR'};
+
 # -------
 # FIGURES
 # -------
-
-# TSNR
-# Fig 3.1
 fig_tsnr_persub = go.Figure()
-#Fig 3.2
-# layout = go.Layout(
-#         yaxis = dict(title = 'Mean tSNR in gray matter', range=[0, 200]),
-#         xaxis = dict(title='Time series'),
-#         margin = {
-#               't': 10,
-#             })
-# fig_tsnr_mean = go.Figure(layout=layout)
-# tsnr_region = 'whole brain'
-# tsnr_run = 'all runs'
-#
-# if tsnr_region == 'whole brain':
-#     tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-GMtsnrmean.tsv')
-# else:
-#     tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + tsnr_region + 'GMtsnrmean.tsv')
-#
-# df_tsnrmean = pd.read_csv(tsnrmean_fn, sep='\t')
-# data2 = []
-# ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-#
-# if tsnr_run == 'all runs':
-#     cols_tasksruns = ['motor_1', 'emotion_1', 'rest_2', 'motor_2', 'emotion_2']
-# else:
-#     cols_tasksruns = [tsnr_run]
-#
-# for x, ts in enumerate(ts_names2):
-#     for c, coltaskrun in enumerate(cols_tasksruns):
-#         txt = coltaskrun + '_' + ts
-#         if c == 0:
-#             temp_dat = df_tsnrmean[txt].to_numpy()
-#         else:
-#             temp_dat = np.concatenate((temp_dat, df_tsnrmean[txt].to_numpy()))
-#     data2.append(temp_dat)
-#     fig_tsnr_mean.add_trace(go.Violin(y=data2[x], line_color=sequential.Inferno[3+x], name=ts, points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
-#
-# fig_tsnr_mean.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
-
-
-
-
-
-
-
-
-# Initialise dynamic figures
 fig_tsnr_mean = go.Figure()
 fig_clusters = go.Figure()
 fig_tvals_summary = go.Figure()
@@ -130,15 +89,16 @@ layout = html.Div([
     html.Div([
         dbc.Tabs(
             [
+                dbc.Tab(label="Methods", tab_id="me-methods"),
                 dbc.Tab(label="tSNR", tab_id="tsnr-page3"),
                 dbc.Tab(label="1st-level clusters", tab_id="clusters"),
-                dbc.Tab(label="Effect sizes", tab_id="cvals"),
-                dbc.Tab(label="T-values", tab_id="tvals"),
+                dbc.Tab(label="Contrast values", tab_id="cvals"),
+                dbc.Tab(label="T-statistic values", tab_id="tvals"),
                 dbc.Tab(label="Perc. signal change", tab_id="pscvals"),
 
             ],
             id="tabs-page3",
-            active_tab="tsnr-page3",
+            active_tab="me-methods",
         ),],
         style={
             'marginBottom': 25,
@@ -278,9 +238,10 @@ def reset_metsnr_imgs(task, run):
      Output('fig_tvals_summary', 'figure'),
     [Input('radio_tasks_tvalsummary','value'),
      Input('radio_runs_tvalsummary','value'),
-     Input('drop_opts_tvalsummary','value')]
+     Input('drop_opts_tvalsummary','value'),
+     Input('drop_clusteropts_tvalsummary','value')]
 )
-def reset_tval_summary_img(task, run, summary_opt):
+def reset_tval_summary_img(task, run, summary_opt, cluster_opt):
     layout = go.Layout(
         yaxis = dict(title = 'T-values', range=[0, 40]),
         xaxis = dict(title='Time series'),
@@ -289,20 +250,18 @@ def reset_tval_summary_img(task, run, summary_opt):
             })
     fig_tvals_summary = go.Figure(layout=layout)
 
-    tval_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + summary_opt + 'Tvalues.tsv')
+    tval_fn = os.path.join(data_dir, 'sub-all_task-' + task + '_run-' + run + '_desc-' + summary_opt +'Tvalues.tsv')
     df_tval = pd.read_csv(tval_fn, sep='\t')
     data = []
     # ts_names3 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
-    taskrun = task + '_' + run
+    ts_names = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
 
-    # only use FWE: ts_names3[0::2]
-    for x, ts in enumerate(ts_names3[0::2]):
-        txt = taskrun + '_' + ts
+    for x, ts in enumerate(ts_colnames):
+        txt = ts + '_' + cluster_opt
         temp_dat = df_tval[txt].to_numpy()
         data.append(temp_dat)
-        fig_tvals_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_tvals_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
 
     fig_tvals_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
 
@@ -357,9 +316,10 @@ def reset_tval_imgs(sub, task, run):
      Output('fig_effect_summary', 'figure'),
     [Input('radio_tasks_effectsummary','value'),
      Input('radio_runs_effectsummary','value'),
-     Input('drop_opts_effectsummary','value')]
+     Input('drop_opts_effectsummary','value'),
+     Input('drop_clusteropts_effectsummary','value')]
 )
-def reset_effect_summary_img(task, run, summary_opt):
+def reset_effect_summary_img(task, run, summary_opt, cluster_opt):
     layout = go.Layout(
             yaxis = dict(title = 'Effect size'),
             xaxis = dict(title='Time series'),
@@ -368,21 +328,19 @@ def reset_effect_summary_img(task, run, summary_opt):
                 })
     fig_effect_summary = go.Figure(layout=layout)
 
-    cval_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + summary_opt +'Cvalues.tsv')
-
+    cval_fn = os.path.join(data_dir, 'sub-all_task-' + task + '_run-' + run + '_desc-' + summary_opt +'Cvalues.tsv')
     df_cval = pd.read_csv(cval_fn, sep='\t')
     data = []
-    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
-    taskrun = task + '_' + run
+    ts_names = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
 
-    # only use FWE: ts_names3[0::2]
-    for x, ts in enumerate(ts_names3[0::2]):
-        txt = taskrun + '_' + ts
+    for x, ts in enumerate(ts_colnames):
+        txt = ts + '_' + cluster_opt
         temp_dat = df_cval[txt].to_numpy()
         data.append(temp_dat)
-        fig_effect_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
-    fig_effect_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
+        fig_effect_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+
+    fig_effect_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group')
     return fig_effect_summary
 
 
@@ -430,9 +388,10 @@ def reset_contrast_imgs(sub, task, run):
      Output('fig_psc_summary', 'figure'),
     [Input('radio_tasks_pscsummary','value'),
      Input('radio_runs_pscsummary','value'),
-     Input('drop_opts_pscsummary','value')]
+     Input('drop_opts_pscsummary','value'),
+     Input('drop_clusteropts_pscsummary','value')]
 )
-def reset_psc_summary_img(task, run, summary_opt):
+def reset_psc_summary_img(task, run, summary_opt, cluster_opt):
     layout = go.Layout(
             yaxis = dict(title = 'Precentage signal change'),
             xaxis = dict(title='Time series'),
@@ -440,21 +399,17 @@ def reset_psc_summary_img(task, run, summary_opt):
                   't': 10,
                 })
     fig_psc_summary = go.Figure(layout=layout)
-
-    psc_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + summary_opt +'PSCvalues.tsv')
-
+    psc_fn = os.path.join(data_dir, 'sub-all_task-' + task + '_run-' + run + '_desc-' + summary_opt +'PSCvalues.tsv')
     df_psc = pd.read_csv(psc_fn, sep='\t')
     data = []
-    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
-    taskrun = task + '_' + run
+    ts_names = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
 
-    # only use FWE: ts_names3[0::2]
-    for x, ts in enumerate(ts_names3[0::2]):
-        txt = taskrun + '_' + ts
+    for x, ts in enumerate(ts_colnames):
+        txt = ts + '_' + cluster_opt
         temp_dat = df_psc[txt].to_numpy()
         data.append(temp_dat)
-        fig_psc_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_psc_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
     fig_psc_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
     return fig_psc_summary
 
@@ -466,13 +421,14 @@ def reset_psc_summary_img(task, run, summary_opt):
      Output('fig_psc_timeseries', 'figure')],
     [Input('drop_subs_psc','value'),
      Input('radio_tasks_psc','value'),
-     Input('radio_runs_psc','value')]
+     Input('radio_runs_psc','value'),
+     Input('drop_clusteropts_psc','value')]
 )
-def reset_psc_imgs(sub, task, run):
+def reset_psc_imgs(sub, task, run, cluster_opt):
 
     layout = go.Layout(
         yaxis = dict(title = 'Time series'),
-        xaxis=dict(title='Percentage signal change', range=[0, 10]),
+        xaxis=dict(title='Percentage signal change', range=[-5, 10]),
         margin={
               't': 10,
             })
@@ -481,11 +437,16 @@ def reset_psc_imgs(sub, task, run):
     data = []
     ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
     ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
+    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+
+    # for x, ts in enumerate(ts_colnames):
+    #     txt = ts + '_' + cluster_opt
     psc_fn = os.path.join(data_dir, sub+'_task-'+task+'_run-'+run+'_desc-PSCvalues.tsv')
     df_psc = pd.read_csv(psc_fn, sep='\t')
 
-    for x, ts in enumerate(ts_names3[-2::-2]):
-        new_dat = df_psc[ts].dropna().to_numpy()
+    for x, ts in enumerate(ts_colnames[::-1]):
+        txt = ts + '_' + cluster_opt
+        new_dat = df_psc[txt].dropna().to_numpy()
         data.append(new_dat)
         fig_psc_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Viridis[8-x], name=ts_names2[5-x], points=False))
 
@@ -504,8 +465,9 @@ def reset_psc_imgs(sub, task, run):
     df_psc_ts = pd.read_csv(psc_ts_fn, sep='\t')
     ts_names4 = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
     data_pscts = []
-    for i, colname in enumerate(ts_names4):
-        data_pscts.append(df_psc_ts[colname].to_numpy())
+    for i, ts in enumerate(ts_colnames):
+        txt = ts + '_' + cluster_opt
+        data_pscts.append(df_psc_ts[txt].to_numpy())
         fig_psc_timeseries.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=sequential.Viridis[3+i], width=2), name=ts_names2[i] ))
         fig_psc_timeseries.update_yaxes(showticklabels=True)
 
@@ -605,8 +567,114 @@ def render_tab_content_page3(active_tab):
     md_psc_1 = dcc.Markdown(''' 
     ''')
 
+    md_methods_1 = dcc.Markdown(''' Below, we give an overview of the main concepts and analysis steps that are followed to generate the main results for this work:  
+    - Echo combination for signal recovery
+    - Echo combination weights
+    - Combining multi-echo data
+    - Comparing the resulting timeseries
+    ''')
+
+    md_methods_2 = dcc.Markdown('''One of the main known uses and benefits of multi-echo fMRI is echo-combination for signal recovery in areas of dropout.
+    In a standard single-echo fMRI sequence, each volume is acquired at an echo time (after transverse excitation) that is optimized for the best whole brain contrast,
+    which is close to the average T2\* value of whole brain grey matter.
+    This results in sub-optimal region-specific contrasts due to the fact that T2\* varies across the brain, roughly as a function of local tissue type.
+    By acquiring multiple images along the signal decay curve, one can use a simplified Bloch-equation to estiate local signal decay parameters,
+    which can in turn be used as weighting factors in a multi-echo combination procedure.
+    This can yield combined fMRI data with less signal dropout and improved local BOLD sensitivity.
+    ''')
+
+    md_methods_3 = dcc.Markdown('''Combination of multi-echo data usually occurs via a weighted combination.
+    Weights can take on scalar values that are constant or that vary spatially across the brain.
+    Typical combinations include: T2\*-weighted, tSNR-weighted, and TE-weighted.
+    For this data, prior weights are calculated from the template functional run, i.e. `task-rest_run-1`.
+    ''')
+
+    md_methods_4 = dcc.Markdown('''Additionally, decay parameters T2\* and S0 can also be estimated per volume (and thus in real-time),
+    after which the so-called T2\*-FIT map can be used as the weighting factor to combine that specific multi-echo volume.
+    ''')
+
+    md_methods_5 = dcc.Markdown('''For this pipeline, each functional run (excluding the template run) are combined using various combination schemes.
+    To allow fair comparison with an accepted baseline (i.e. "what would results from standard fMRI look like?"), the middle/2nd echo timeseries (with TE=28ms) is also extracted as is.
+    Additionally, the T2\*-FIT time series is extracted too. This yields 6 resulting time series for each single multi-echo time series: the 2nd echo, 4 combined time series and the T2\*-FIT time series.
+    ''')
+
+    md_methods_6 = dcc.Markdown('''Finally, several analysis steps are run on each of the 6 time series to allow comparison.
+    ''')
+
+    md_methods_7 = dcc.Markdown(''' 
+    ''')
+
     if active_tab is not None:
-        if active_tab == "tsnr-page3":
+        if active_tab == "me-methods":
+            return [
+                html.H2('Multi-echo analysis methods', style={'textAlign': 'center'}),
+                html.H5('Summary'),
+                md_methods_1,
+                html.Br([]),
+                html.H5('Multi-echo combination'),
+                md_methods_2,
+                dbc.Row([
+                    dbc.Col([
+                        html.Div([
+                            html.Br([]),
+                            html.Br([]),
+                            html.Img(src="/assets/me_fig_recovery.png", width="100%")],
+                            style={
+                                'textAlign': 'center'
+                            }
+                        ),
+                    ], width={"size": 5, "offset": 1}),
+                    dbc.Col([
+                        html.Div(
+                            html.Img(src="/assets/me_math2.png", width="100%"),
+                            style={
+                                'textAlign': 'center'
+                            }
+                        ),
+                    ], width={"size": 5, "offset": 1}),
+                ]),
+
+                html.Br([]),
+                html.H5('Multi-echo combination weights'),
+                md_methods_3,
+                html.Br([]),
+                html.Div(
+                    html.Img(src="/assets/me_fig_priorweights.png", width="60%"),
+                    style={
+                        'textAlign': 'center'
+                    }
+                ),
+                html.Br([]),
+                md_methods_4,
+                html.Div(
+                    html.Img(src="/assets/me_fig_rtT2star.png", width="60%"),
+                    style={
+                        'textAlign': 'center'
+                    }
+                ),
+                html.Br([]),
+                html.Br([]),
+                html.H5('Combining multi-echo data'),
+                md_methods_5,
+                html.Div(
+                    html.Img(src="/assets/me_fig_combinedTS.png", width="60%"),
+                    style={
+                        'textAlign': 'center'
+                    }
+                ),
+                html.Br([]),
+                html.Br([]),
+                html.H5('Comparing resulting data'),
+                md_methods_6,
+                html.Br([]),
+                html.Div(
+                    html.Img(src="/assets/me_fig_compare.png", width="60%"),
+                    style={
+                        'textAlign': 'center'
+                    }
+                ),
+            ]
+        elif active_tab == "tsnr-page3":
             return [
                 html.H2('tSNR in gray matter', style={'textAlign': 'center'}),
                 html.H5('Mean tSNR'),
@@ -772,6 +840,16 @@ def render_tab_content_page3(active_tab):
                                 )],
                             )
                         ),
+                    ], width={"size": 2, "offset": 0}),
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_clusteropts_tvalsummary',
+                                options=clusters_opts,
+                                value='FWE',
+                            )
+                            ],
+                        )),
                     ], width={"size": 2, "offset": 1}),
                 ]),
                 dbc.Row([
@@ -871,6 +949,16 @@ def render_tab_content_page3(active_tab):
                                 )],
                             )
                         ),
+                    ], width={"size": 2, "offset": 0}),
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_clusteropts_effectsummary',
+                                options=clusters_opts,
+                                value='FWE',
+                            )
+                            ],
+                        )),
                     ], width={"size": 2, "offset": 1}),
                 ]),
                 dbc.Row([
@@ -928,7 +1016,7 @@ def render_tab_content_page3(active_tab):
             ]
         elif active_tab == "pscvals":
             return [
-                html.H2('PSC in task clusters', style={'textAlign': 'center'}),
+                html.H2('PSC summary in selected cluster/ROI', style={'textAlign': 'center'}),
                 html.Br([]),
                 md_psc_1,
                 html.Br([]),
@@ -967,6 +1055,16 @@ def render_tab_content_page3(active_tab):
                                 )],
                             )
                         ),
+                    ], width={"size": 2, "offset": 0}),
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_clusteropts_pscsummary',
+                                options=clusters_opts,
+                                value='FWE',
+                            )
+                            ],
+                        )),
                     ], width={"size": 2, "offset": 1}),
                 ]),
                 dbc.Row([
@@ -980,7 +1078,7 @@ def render_tab_content_page3(active_tab):
                     ),
 
                 ]),
-                html.H5('PSC distributions'),
+                html.H5('PSC distributions in selected cluster/ROI'),
                 dbc.Row([
                     dbc.Col([
                         dbc.Row(dbc.Col([
@@ -1011,6 +1109,15 @@ def render_tab_content_page3(active_tab):
                                 inline=True,
                             )],
                         )),
+                        html.Br([]),
+                        dbc.Row(dbc.Col([
+                            # dbc.Label('Participant'),
+                            dcc.Dropdown(
+                                id='drop_clusteropts_psc',
+                                options=clusters_opts,
+                                value='FWE',
+                            )],
+                        )),
                     ], width={"size": 3, "offset": 0}),
                     dbc.Col([
 
@@ -1021,7 +1128,7 @@ def render_tab_content_page3(active_tab):
                         width={"size": 9, "offset": 0}
                     ),
                 ]),
-                html.H5('PSC time series in atlas-based anatomical ROI'),
+                html.H5('PSC time series in selected cluster/ROI'),
                 dbc.Row([
                     dbc.Col([
 
@@ -1036,4 +1143,3 @@ def render_tab_content_page3(active_tab):
             ]
 
     return "No tab selected"
-

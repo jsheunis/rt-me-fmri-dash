@@ -19,7 +19,7 @@ card_browse = [
         [
             html.H5("Overview", className="card-title"),
             html.P(
-                "lorum ipsum blabla ...",
+                "The rt-me-fMRI dataset consist of T1w, resting and task-based multi-echo fMRI data from 28 participants...",
                 className="card-text",
             ),
             dbc.Button("See data description", color="light", href="/pages/page1", external_link=True),
@@ -32,7 +32,7 @@ card_visualize = [
         [
             html.H5("Quality", className="card-title"),
             html.P(
-                "lorum ipsum blabla ...",
+                "Standard quality pipelines were applied to the data to allow quality control, inspection and visualization...",
                 className="card-text",
             ),
             dbc.Button("Inspect data quality", color="light", href="/pages/page2", external_link=True),
@@ -45,7 +45,7 @@ card_submit = [
         [
             html.H5("Multi-echo", className="card-title"),
             html.P(
-                "lorum ipsum blabla ...",
+                "New methods were developed for offline and real-time multi-echo fMRI combination and analysis...",
                 className="card-text",
             ),
             dbc.Button("View multi-echo measures", color="light", href="/pages/page3", external_link=True),

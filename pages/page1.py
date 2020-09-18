@@ -5,6 +5,10 @@ import dash_html_components as html
 
 main_md = dcc.Markdown('''
 
+
+The `rt-me-fMRI` dataset was collected to investigate improved real-time functional magnetic resonance imaging (fMRI) methods for applications in neurofeedback.
+It contains 6 runs of resting state and task data from 28 healthy volunteers, along with T1w scans and physiology data.
+
 For each participant, data collected during a single scanning session consists of 7 individual scans, depicted below.
 The session started with a T1-weighted sequence to acquire a high resolution anatomical image.
 This was followed by multi-echo functional MRI scans that were completed in two consecutive runs, each run consisting of 3 scans: 1 resting state scan, 1 motor task scan, and one emotion task scan.
