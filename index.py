@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
+
+# Run this app with `python index.py` and
+# visit http://127.0.0.1:8050/ in your web browser.
+
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from app import app, server
-from pages import home, page1, page2, page3, page4
+from pages import home, access, overview, quality, multiecho, about
 import flask
 
-
-nav_item1 = dbc.NavItem(dbc.NavLink("Overview", href="/pages/page1", external_link=True))
-nav_item2 = dbc.NavItem(dbc.NavLink("Quality", href="/pages/page2", external_link=True))
-nav_item3 = dbc.NavItem(dbc.NavLink("Multi-echo", href="/pages/page3", external_link=True))
-nav_item4 = dbc.NavItem(dbc.NavLink("About", href="/pages/page4", external_link=True))
+nav_item0 = dbc.NavItem(dbc.NavLink("Access", href="/pages/access", external_link=True))
+nav_item1 = dbc.NavItem(dbc.NavLink("Overview", href="/pages/overview", external_link=True))
+nav_item2 = dbc.NavItem(dbc.NavLink("Quality", href="/pages/quality", external_link=True))
+nav_item3 = dbc.NavItem(dbc.NavLink("Multi-echo", href="/pages/multiecho", external_link=True))
+nav_item4 = dbc.NavItem(dbc.NavLink("About", href="/pages/about", external_link=True))
 
 nav_bar_and_content_div = html.Div(children=[
     dcc.Location(id='url', refresh=False),
@@ -33,7 +37,7 @@ nav_bar_and_content_div = html.Div(children=[
                 dbc.NavbarToggler(id="navbar-toggler"),
                 dbc.Collapse(
                     dbc.Nav(
-                        [nav_item1, nav_item2, nav_item3, nav_item4], className="ml-auto", navbar=True
+                        [nav_item0, nav_item1, nav_item2, nav_item3, nav_item4], className="ml-auto", navbar=True
                     ),
                     id="navbar-collapse",
                     navbar=True,
@@ -56,10 +60,11 @@ def serve_layout():
     return html.Div([
         nav_bar_and_content_div,
         home.layout,
-        page1.layout,
-        page2.layout,
-        page3.layout,
-        page4.layout,
+        access.layout,
+        overview.layout,
+        quality.layout,
+        multiecho.layout,
+        about.layout,
     ])
 
 
@@ -91,18 +96,21 @@ def display_page(pathname):
     if pathname == '/':
         logo_url = 'assets/melogo2.png'
         return [home.layout, logo_url]
-    elif pathname == '/pages/page1':
+    elif pathname == '/pages/access':
         logo_url = '../assets/melogo2.png'
-        return [page1.layout, logo_url]
-    elif pathname == '/pages/page2':
+        return [access.layout, logo_url]
+    elif pathname == '/pages/overview':
         logo_url = '../assets/melogo2.png'
-        return [page2.layout, logo_url]
-    elif pathname == '/pages/page3':
+        return [overview.layout, logo_url]
+    elif pathname == '/pages/quality':
         logo_url = '../assets/melogo2.png'
-        return [page3.layout, logo_url]
-    elif pathname == '/pages/page4':
+        return [quality.layout, logo_url]
+    elif pathname == '/pages/multiecho':
         logo_url = '../assets/melogo2.png'
-        return [page4.layout, logo_url]
+        return [multiecho.layout, logo_url]
+    elif pathname == '/pages/about':
+        logo_url = '../assets/melogo2.png'
+        return [about.layout, logo_url]
     else:
         return '404'
 
