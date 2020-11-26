@@ -240,20 +240,33 @@ def update_fd_persub_figs(clickData):
 
 
 
-# # Callback for updating tsnr html and figure based on drop1, radio1, radio2 values
-# @app.callback(
-#      Output('drop1','value'),
-#     [Input('fig4', 'clickData')]
-# )
-# def reset_sub_tsnr_info(clickData):
+# Callback for updating tsnr html and figure based on drop1, radio1, radio2 values
+@app.callback(
+     Output('drop_subs_tsnr','value'),
+    [Input('fig4', 'clickData')]
+)
+def reset_sub_tsnr_info(clickData):
+    if clickData is None:
+        raise PreventUpdate
+    else:
+        selected_sub = all_subs[clickData['points'][0]['curveNumber']]
+    return selected_sub
 
-#     if clickData is None:
-#         raise PreventUpdate
-#     else:
-#         selected_sub = all_subs[clickData['points'][0]['curveNumber']]
 
-#     return selected_sub
-
+@app.callback(
+    Output('fig4', 'figure'),
+    [Input('fig4', 'hoverData')]
+)
+def highlight_trace(hover_data):
+    # here you set the default settings
+    for trace in fig4.data:
+        trace["line"]["width"] = 2
+        # trace["opacity"] = 0.5
+    if hover_data:
+        trace_index = hover_data["points"][0]["curveNumber"]
+        fig4.data[trace_index]["line"]["width"] = 4.5
+        # fig4.data[trace_index]["opacity"] = 1
+    return fig4
 
 # Callback for updating tsnr figure based on subject and task
 @app.callback(
@@ -465,7 +478,7 @@ def render_tab_content(active_tab):
                 html.Br([]),
                 dbc.Row(
                     dbc.Col(
-                        dcc.Graph(figure=fig4, id='fig4')
+                        dcc.Graph(figure=fig4, id='fig4', clear_on_unhover=True)
                     )
                 ),
 
