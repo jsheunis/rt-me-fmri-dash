@@ -28,12 +28,14 @@ from utilities import writeStyle
 # }
 
 # Directories
-data_dir = '../rt-me-fmri-data-v2/quality'
+data_dir = 'data/quality'
+quality_dir = os.path.dirname(__file__) # the cwd relative path of the script file
+# script_dir = os.path.dirname(__file__) # the cwd relative path of the script file
 
 
 
 # Filenames
-participants_fn = os.path.join('../rt-me-fmri-data-v2', 'participants.tsv')
+participants_fn = os.path.join('data', 'participants.tsv')
 fdallsubs_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdallsubs.tsv')
 fdmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdmean.tsv')
 fdsum_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdsum.tsv')
@@ -61,6 +63,8 @@ tasks = ['rest', 'motor', 'emotion']
 runs = ['1', '2']
 cols_tasksruns = ['rest 1', 'motor 1', 'emotion 1', 'rest 2', 'motor 2', 'emotion 2']
 sub_opts = [{'label': sub, 'value': sub} for sub in all_subs]
+subs2 = ['sub-001', 'sub-010']
+sub2_opts = [{'label': sub, 'value': sub} for sub in subs2] 
 task_opts = [{'label': task.capitalize(), 'value': task} for task in tasks]
 run_opts = [{'label': 'Run '+run, 'value': run} for run in runs]
 tasks_v2 = ['rest_run-1', 'fingerTapping', 'emotionProcessing', 'rest_run-2', 'fingerTappingImagined', 'emotionProcessingImagined']
@@ -490,7 +494,7 @@ def render_tab_content(active_tab):
                             dbc.Col([
                                 dcc.Dropdown(
                                     id='drop_subs_tsnr',
-                                    options=sub_opts,
+                                    options=sub2_opts,
                                     value='sub-001',
                                 )
                                 ], width={"size": 10, "offset": 0}),

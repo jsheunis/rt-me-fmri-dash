@@ -16,7 +16,7 @@ import math
 
 # Directories
 data_dir = '../rt-me-fmri-data'
-data_dir_v2 = '../rt-me-fmri-data-v2'
+data_dir_v2 = 'data'
 
 # Get data
 participants_fn = os.path.join(data_dir_v2, 'participants.tsv')
@@ -26,6 +26,8 @@ df_participants = pd.read_csv(participants_fn, sep='\t')
 all_subs = list(df_participants['participant_id'])
 tasks = ['rest', 'motor', 'emotion']
 runs = ['1', '2']
+subs2 = ['sub-001', 'sub-010']
+sub2_opts = [{'label': sub, 'value': sub} for sub in subs2] 
 sub_opts = [{'label': sub, 'value': sub} for sub in all_subs]
 task_opts = [{'label': task.capitalize(), 'value': task} for task in tasks]
 run_opts = [{'label': 'Run '+run, 'value': run} for run in runs]
@@ -1000,7 +1002,7 @@ def render_tab_content_page3(active_tab):
                             dbc.Col([
                                 dcc.Dropdown(
                                     id='drop_subs',
-                                    options=sub_opts,
+                                    options=sub2_opts,
                                     value='sub-001',
                                 )
                                 ], width={"size": 10, "offset": 0}),
@@ -1177,7 +1179,7 @@ def render_tab_content_page3(active_tab):
                             # dbc.Label('Participant'),
                             dcc.Dropdown(
                                 id='drop_subs_tvals',
-                                options=sub_opts,
+                                options=sub2_opts,
                                 value='sub-001',
                             )],
                         )),
@@ -1320,7 +1322,7 @@ def render_tab_content_page3(active_tab):
                         dbc.Row(dbc.Col([
                             dcc.Dropdown(
                                 id='drop_subs_psc',
-                                options=sub_opts,
+                                options=sub2_opts,
                                 value='sub-001',
                             )],
                         )),
@@ -1436,7 +1438,7 @@ def render_tab_content_page3(active_tab):
                         dbc.Row(dbc.Col([
                             dcc.Dropdown(
                                 id='drop_subs_realtime',
-                                options=sub_opts,
+                                options=sub2_opts,
                                 value='sub-001',
                             )
                             ],
