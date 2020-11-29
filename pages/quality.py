@@ -12,6 +12,7 @@ import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 import numpy as np
 import json
+from utilities import writeStyle
 
 
 # ------------ #
@@ -29,6 +30,8 @@ import json
 # Directories
 data_dir = '../rt-me-fmri-data-v2/quality'
 
+
+
 # Filenames
 participants_fn = os.path.join('../rt-me-fmri-data-v2', 'participants.tsv')
 fdallsubs_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-fdallsubs.tsv')
@@ -38,6 +41,7 @@ tsnrgm_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrgm.tsv')
 tsnrwm_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrwm.tsv')
 tsnrcsf_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrcsf.tsv')
 tsnrbrain_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrbrain.tsv')
+qc_summary_fn = os.path.join(data_dir, 'sub-all_task-all_desc-allQCmetrics.tsv')
 
 # Get data
 df_participants = pd.read_csv(participants_fn, sep='\t')
@@ -48,6 +52,8 @@ df_tsnrgm = pd.read_csv(tsnrgm_fn, sep='\t')
 df_tsnrwm = pd.read_csv(tsnrwm_fn, sep='\t')
 df_tsnrcsf = pd.read_csv(tsnrcsf_fn, sep='\t')
 df_tsnrbrain = pd.read_csv(tsnrbrain_fn, sep='\t')
+df_qcsummary = pd.read_csv(qc_summary_fn, sep='\t')
+df_qcsummary = df_qcsummary.round(2)
 
 # Dataset specifics
 all_subs = list(df_participants['participant_id'])
@@ -71,6 +77,22 @@ for i, task in enumerate(tasks_v2):
     txt = 'task-' + task
     respData[txt] = pd.read_csv(os.path.join(data_dir, 'sub-all_task-' + task + '_desc-physioResp.tsv'), sep='\t')
     cardData[txt] = pd.read_csv(os.path.join(data_dir, 'sub-all_task-' + task + '_desc-physioCard.tsv'), sep='\t')
+
+
+# QC summary data
+max_rows = 200
+qctable = html.Table([
+    html.Thead(
+        html.Tr([html.Th(col) for col in df_qcsummary.columns.values.tolist()])
+    ),
+    html.Tbody([
+        html.Tr([
+            html.Td(df_qcsummary.iloc[i][col], style=writeStyle(col)) for col in df_qcsummary.columns],
+        ) for i in range(min(len(df_qcsummary), max_rows))
+    ]),
+    ],
+    className='qcsummary',
+)
 
 
 # ------------ #
@@ -159,6 +181,13 @@ main_md = dcc.Markdown('''
 Hello!
 ''')
 
+
+
+# The fMRwhy toolbox has a BIDS-compatible data quality pipeline for functional and anatomical MRI, fmrwhy_bids_workflowQC, that can be run automatically for a full BIDS-compliant dataset. After running minimal preprocessing steps it generates a subject-specific HTML-report with quality control metrics and visualizations to allow inspection of the data and its derivatives. Individual reports can be accessed in the derivatives directory of the shared BIDS-compliant dataset of this study (see Heunis et al., 2020 for details). Additionally, a web-application named rt-me-fMRI is provided along with this work and accessible at: (insert link when ready). This browser-based app can be used interactively to explore various summaries of data quality metrics, including distributions of framewise displacement (FD) and tSNR, and physiology recordings, as well as the results of this study.
+
+# None of the participant datasets were excluded after inspection of the included quality metrics, even in cases of more than average or severe motion (specifically sub-010, sub-020, and sub-021), since such data could still be useful for data quality related insights or for future denoising methods validation.
+
+
 layout = html.Div([
             dcc.Store(id="store"),
             html.Div([
@@ -169,6 +198,7 @@ layout = html.Div([
                         dbc.Tab(label="tSNR", tab_id="tsnr"),
                         dbc.Tab(label="Physiology", tab_id="physio"),
                         dbc.Tab(label="Tasks", tab_id="tasks"),
+                        dbc.Tab(label="QC summary", tab_id="qc_summary"),
                     ],
                     id="tabs",
                     active_tab="description",
@@ -196,6 +226,7 @@ layout = html.Div([
 # CALLBACKS    #
 # ------------ #
 # ------------ #
+
 
 
 # Callback for updating Fig2 based on Fig1 clickData
@@ -352,77 +383,22 @@ def reset_phys_imgs(task):
     return [fig5, fig6, resp_heading, card_heading]
 
 
-# @app.callback(
-#      Output('fig7', 'figure'),
-#     [Input('radio5roi','value'),
-#      Input('radio6roi','value'),
-#      Input('dropts','value')]
-# )
-# def reset_roi_img1(task, run, ts_name):
-
-#     anat_vals = []
-#     func_vals = []
-#     func_vals_nooverlap = []
-#     txt = 'task-' + task + '_run-' + run
-
-#     for i, sub in enumerate(all_subs):
-#         anat_vals.append(overlapData[txt].loc[i, 'anat_roi'])
-#         func_vals.append(overlapData[txt].loc[i, ts_name])
-#         func_vals_nooverlap.append(anat_vals[-1] - func_vals[-1])
-
-#     fig7 = go.Figure(data=[
-#         go.Bar(name='Func/Anat overlap', x=all_subs, y=func_vals, marker_color=sequential.Viridis[5]),
-#         go.Bar(name='Anat ROI (no overlap)', x=all_subs, y=func_vals_nooverlap, marker_color=sequential.Viridis[8])
-#     ])
-#     # Change the bar mode
-#     fig7.update_layout(barmode='stack', xaxis = dict(title = 'All participants', tickangle=45), yaxis = dict(title = 'Number of voxels'), margin={'t': 10})
-
-#     return fig7
-
-
-# @app.callback(
-#      Output('fig8', 'figure'),
-#     [Input('radio5roi','value'),
-#      Input('radio6roi','value'),
-#      Input('fig7','clickData')]
-# )
-# def reset_roi_img2(task, run, clickData):
-
-#     if clickData is None:
-#         selected_subnr = 0
-#     else:
-#         selected_subnr = clickData['points'][0]['pointIndex']
-
-#     txt = 'task-' + task + '_run-' + run
-#     vals = overlapData[txt].loc[selected_subnr].to_numpy()
-#     func_vals = vals[1:]
-#     func_vals_nooverlap = vals[0] - func_vals
-#     cols = list(overlapData[txt].columns)
-#     cols = cols[1:]
-
-#     fig8 = go.Figure(data=[
-#         go.Bar(name='Func/Anat overlap', x=cols, y=func_vals, marker_color=sequential.Viridis[5]),
-#         go.Bar(name='Anat ROI (no overlap)', x=cols, y=func_vals_nooverlap, marker_color=sequential.Viridis[8])
-#     ])
-#     fig8.update_layout(barmode='stack', xaxis = dict(title = 'All time series', tickangle=45),
-#                        yaxis = dict(title = 'Number of voxels'), margin={'t': 40},
-#                        title='ROI overlap computed from all time series options - '+all_subs[selected_subnr])
-
-#     return fig8
-
-# @app.callback(
-#     Output('click-data', 'children'),
-#     [Input('fig7', 'clickData')])
-# def display_click_data(clickData):
-#     return json.dumps(clickData, indent=2)
-
-
 
 # ------------- #
 # ------------- #
 # LAYOUT UPDATE #
 # ------------- #
 # ------------- #
+
+quality1_md = dcc.Markdown('''
+The anatomical and functional data of all participants underwent standard preprocessing and quality control steps (depicted below),
+using the open source MATLAB-based and Octave-compatible [`fMRwhy`](https://github.com/jsheunis/fMRwhy) toolbox.
+
+The BIDS-compatible data quality pipeline (`fmrwhy_bids_workflowQC`) generates participant-specific HTML-reports with quality control metrics and visualizations to allow inspection of the data and its derivatives.
+Individual reports can be accessed in the derivatives directory of `rt-me-fMRI` dataset.
+
+This site allows exploring quality measures for all participants and functional runs, such as **framewise displacement**, **temporal signal-to-noise ratio**, **physiology traces**, and **group activity maps**.
+''')
 
 @app.callback(
     Output("tab-content", "children"),
@@ -438,6 +414,30 @@ def render_tab_content(active_tab):
         if active_tab == "description":
             return [
                 html.H2('Quality assessment', style={'textAlign': 'center'}),
+                html.Br([]),
+                dbc.Row([
+                    dbc.Col([
+                        
+                        html.Div(
+                            quality1_md,
+                            style={
+                                'textAlign': 'justify',
+                            }
+                        ),], width={"size": 5, "offset": 0}
+                    ),
+                    dbc.Col([
+                        html.Img(src="/assets/preprod_qc.png", width="98%"),
+                        ],
+                    width={"size": 7, "offset": 0},
+                    style={
+                                'textAlign': 'center',
+                            }
+                    ),
+                    ]
+                ),
+                
+                html.Br([]),
+                
                 ]
         elif active_tab == "head_movement":
             return [
@@ -631,51 +631,26 @@ def render_tab_content(active_tab):
                 #     )
                 # ),
             ]
+        elif active_tab == "qc_summary":
+            return [
+                html.H2('QC metric summary', style={'textAlign': 'center'}),
+                html.Br([]),
+                html.Div(
+                    qctable,
+                    id='table-1',
+                    style={
+                        'marginBottom': 25,
+                        'marginTop': 25,
+                        'marginLeft': '5%',
+                        'maxWidth': '90%',
+                    }
+                )
+                
+                # html.Iframe(id='qc_table', src='/assets/qc_table.html', style={'border': 'none', 'width': '100%', 'height': 500}),
+                    
+                
+            ]
+
 
     return "No tab selected"
 
-
-# TASKS TAB
-
-# overlapData = {}
-# for i, task in enumerate(tasks_1stlevel_v2):
-#     txt = 'task-' + task
-#     overlapData[txt] = pd.read_csv(os.path.join(data_dir, 'sub-all_task-' + task + '_desc-roiOverlap.tsv'), sep='\t')
-
-# anat_vals = []
-# func_vals = []
-# func_vals_nooverlap = []
-
-# task = 'motor'
-# run = '1'
-# ts_names = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
-# ts_name = ts_names[0]
-# ts_opts = [{'label': ts, 'value': ts} for ts in ts_names]
-# txt = 'task-' + task + '_run-' + run
-
-# for i, sub in enumerate(all_subs):
-#     anat_vals.append(overlapData[txt].loc[i, 'anat_roi'])
-#     func_vals.append(overlapData[txt].loc[i, ts_name])
-#     func_vals_nooverlap.append(anat_vals[-1] - func_vals[-1])
-
-# fig7 = go.Figure(data=[
-#     go.Bar(name='Func/Anat overlap', x=all_subs, y=func_vals, marker_color=sequential.Viridis[5]),
-#     go.Bar(name='Anat ROI (no overlap)', x=all_subs, y=func_vals_nooverlap, marker_color=sequential.Viridis[8])
-# ])
-# # Change the bar mode
-# fig7.update_layout(barmode='stack', xaxis = dict(title = 'All participants', tickangle=45), yaxis = dict(title = 'Number of voxels'), margin={'t': 10})
-
-
-# # Fig8
-# subnr = 0
-# vals = overlapData[txt].loc[subnr].to_numpy()
-# func_vals = vals[1:]
-# func_vals_nooverlap = vals[0] - func_vals
-# cols = list(overlapData[txt].columns)
-# cols = cols[1:]
-
-# fig8 = go.Figure(data=[
-#     go.Bar(name='Func/Anat overlap', x=cols, y=func_vals, marker_color=sequential.Viridis[5]),
-#     go.Bar(name='Anat ROI (no overlap)', x=cols, y=func_vals_nooverlap, marker_color=sequential.Viridis[8])
-# ])
-# fig8.update_layout(barmode='stack', xaxis = dict(title = 'All time series', tickangle=45), yaxis = dict(title = 'Number of voxels'), margin={'t': 10})

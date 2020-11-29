@@ -18,15 +18,8 @@ import math
 data_dir = '../rt-me-fmri-data'
 data_dir_v2 = '../rt-me-fmri-data-v2'
 
-# Filenames
-
-tsnrgm_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrgm.tsv')
-tsnrwm_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrwm.tsv')
-tsnrcsf_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrcsf.tsv')
-tsnrbrain_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-tsnrbrain.tsv')
-
 # Get data
-participants_fn = os.path.join(data_dir, 'participants.tsv')
+participants_fn = os.path.join(data_dir_v2, 'participants.tsv')
 df_participants = pd.read_csv(participants_fn, sep='\t')
 
 # Dataset specifics
@@ -80,6 +73,18 @@ psc_types = ['glm', 'offline', 'cumulative', 'cumulativebas', 'previousbas']
 psc_types_names = ['GLM', 'Offline', 'Cumulative', 'Cumulative baseline', 'Previous baseline']
 psc_types_opts = [{'label': psc_types_names[i], 'value': p} for i, p in enumerate(psc_types)]
 
+overlapData = {}
+for i, task in enumerate(tasks_1stlevel_v2):
+    txt = 'task-' + task
+    overlapData[txt] = pd.read_csv(os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-' + task + '_desc-roiOverlap.tsv'), sep='\t')
+
+overlap_colnames_disp = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
+overlap_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+overlap_opts = [{'label': overlap_colnames_disp[i], 'value': ts} for i, ts in enumerate(overlap_colnames)]
+
+clusters_overlap = ['FWE', 'noFWE']
+cluster_names_overlap = ['Task (FWE)', 'Task (noFWE)']
+clusters_opts_overlap = [{'label': cluster_names_overlap[i], 'value': c} for i, c in enumerate(clusters_overlap)]
 
 # echo_colnames = {'echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit'};
 # cluster_colnames = {'FWE', 'noFWE', 'anatROI', 'fweAND', 'fweOR'};
@@ -90,6 +95,8 @@ psc_types_opts = [{'label': psc_types_names[i], 'value': p} for i, p in enumerat
 fig_tsnr_mean = go.Figure()
 fig_tsnr_persub = go.Figure()
 fig_clusters = go.Figure()
+fig_overlap_summary = go.Figure()
+fig_overlap_persub = go.Figure()
 fig_tvals_summary = go.Figure()
 fig_effect_summary = go.Figure()
 fig_tvals_persub = go.Figure()
@@ -101,6 +108,20 @@ fig_cnr_offline = go.Figure()
 fig_realtime_series = go.Figure()
 fig_realtime_summary = go.Figure()
 
+
+# Fig8
+subnr = 0
+vals = overlapData[txt].loc[subnr].to_numpy()
+func_vals = vals[1:]
+func_vals_nooverlap = vals[0] - func_vals
+cols = list(overlapData[txt].columns)
+cols = cols[1:]
+
+fig8 = go.Figure(data=[
+    go.Bar(name='Func/Anat overlap', x=cols, y=func_vals, marker_color=sequential.Viridis[5]),
+    go.Bar(name='Anat ROI (no overlap)', x=cols, y=func_vals_nooverlap, marker_color=sequential.Viridis[8])
+])
+fig8.update_layout(barmode='stack', xaxis = dict(title = 'All time series', tickangle=45), yaxis = dict(title = 'Number of voxels'), margin={'t': 10})
 
 # -------------------------------------------------- #
 # -------------------------------------------------- #
@@ -173,10 +194,8 @@ def reset_tsnr_summary(tsnr_region, tsnr_run):
     fig_tsnr_mean = go.Figure(layout=layout)
 
     if tsnr_region == 'whole brain':
-        # tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-GMtsnrmean.tsv')
         tsnrmean_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-all_desc-GMtsnrmean.tsv')
     else:
-        # tsnrmean_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-' + tsnr_region + 'GMtsnrmean.tsv')
         tsnrmean_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-all_desc-' + tsnr_region + 'GMtsnrmean.tsv')
 
 
@@ -225,10 +244,8 @@ def reset_metsnr_imgs(sub, task):
     data = []
     for x, ts in enumerate(ts_names):
         if x == 5:
-            # GMtsnr_tsv = os.path.join(data_dir, sub+'_task-'+task+'_echo-2_desc-rapreproc_GMtsnr.tsv')
             GMtsnr_tsv = os.path.join(data_dir_v2, 'multiecho', sub+'_task-'+task+'_echo-2_desc-rapreproc_GMtsnr.tsv')
         else:
-            # GMtsnr_tsv = os.path.join(data_dir, sub+'_task-'+task+'_desc-' + ts + '_GMtsnr.tsv')
             GMtsnr_tsv = os.path.join(data_dir_v2, 'multiecho', sub+'_task-'+task+'_desc-' + ts + '_GMtsnr.tsv')
 
         df_GMtsnr = pd.read_csv(GMtsnr_tsv, sep='\t').dropna()
@@ -249,32 +266,101 @@ def reset_metsnr_imgs(sub, task):
 @app.callback(
      Output('fig_clusters', 'figure'),
     [Input('radio_tasks_clusters','value'),
-     Input('radio_runs_clusters','value')]
+     Input('drop_clusteropts_clusters','value')]
 )
-def reset_cluster_img(task, run):
+def reset_cluster_img(task, cluster):
     layout = go.Layout(
-        yaxis = dict(title = '1st level task cluster sizes', range=[-500, 5500]),
+        yaxis = dict(title = 'Number of voxels', range=[-500, 5500]),
         xaxis = dict(title='Time series'),
         margin = {
               't': 10,
             })
     fig_clusters = go.Figure(layout=layout)
-    tvalclusters_fn = os.path.join(data_dir, 'sub-all_task-all_run-all_desc-TclusterSizes.tsv')
+    tvalclusters_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-all_desc-clusterSizes.tsv')
     df_tvalclusters = pd.read_csv(tvalclusters_fn, sep='\t')
     data_cluster = []
-    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names3 = ['echo2_FWE', 'echo2_noFWE', 'combTSNR_FWE', 'combTSNR_noFWE', 'combT2STAR_FWE', 'combT2STAR_noFWE', 'combTE_FWE', 'combTE_noFWE', 'combT2STARfit_FWE', 'combT2STARfit_noFWE', 'T2STARfit_FWE', 'T2STARfit_noFWE']
+    ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_names3 = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
 
-    # only use FWE: ts_names3[0::2]
-    taskrun = task + '_' + run
-    for x, ts in enumerate(ts_names3[0::2]):
-        txt = taskrun + '_' + ts
+    for x, ts in enumerate(ts_names3):
+        txt = task + '_' + ts + '_' + cluster
         temp_dat_cluster = df_tvalclusters[txt].to_numpy()
         data_cluster.append(temp_dat_cluster)
-        fig_clusters.add_trace(go.Violin(y=data_cluster[x], line_color=sequential.Viridis[3+x], name=ts_names2[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_clusters.add_trace(go.Violin(y=data_cluster[x], line_color=sequential.Cividis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+    
     fig_clusters.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
     return fig_clusters
 
+
+
+
+# OVERLAP: UPDATE SUMMARY FIGURE
+@app.callback(
+     Output('fig_overlap_summary', 'figure'),
+    [Input('radio_tasks_overlap','value'),
+     Input('drop_timeseries_overlap','value'),
+     Input('drop_clusteropts_overlap','value')] 
+)
+def reset_overlap_persub(task, timeseries, cluster):
+    anat_vals = []
+    func_vals = []
+    func_vals_nooverlap = []
+    cluster_ts_name = timeseries + '_' + cluster
+    txt = 'task-' + task
+
+    for i, sub in enumerate(all_subs):
+        anat_vals.append(overlapData[txt].loc[i, 'anat_roi'])
+        func_vals.append(overlapData[txt].loc[i, cluster_ts_name])
+        func_vals_nooverlap.append(anat_vals[-1] - func_vals[-1])
+
+    fig_overlap_summary = go.Figure(data=[
+        go.Bar(name='Func/Anat overlap', x=all_subs, y=func_vals, marker_color=sequential.Magma[5]),
+        go.Bar(name='Anat ROI (no overlap)', x=all_subs, y=func_vals_nooverlap, marker_color=sequential.Magma[7])
+    ])
+    # Change the bar mode
+    fig_overlap_summary.update_layout(barmode='stack', xaxis = dict(title = 'All participants', tickangle=45), yaxis = dict(title = 'Number of voxels'), margin={'t': 10})
+
+    return fig_overlap_summary
+
+
+# OVERLAP: UPDATE persub FIGURE
+@app.callback(
+     Output('fig_overlap_persub', 'figure'),
+    [Input('radio_tasks_overlap','value'),
+     Input('drop_clusteropts_overlap','value'),
+     Input('fig_overlap_summary','clickData')]
+)
+def reset_roi_img2(task, cluster, clickData):
+
+    if clickData is None:
+        selected_subnr = 0
+    else:
+        selected_subnr = clickData['points'][0]['pointIndex']
+
+    txt = 'task-' + task
+    vals = overlapData[txt].loc[selected_subnr].to_numpy()
+    if cluster == 'FWE':
+        func_vals = vals[1::2]
+    else:
+        func_vals = vals[2::2]
+    
+    func_vals_nooverlap = vals[0] - func_vals
+    cols = list(overlapData[txt].columns)
+    if cluster == 'FWE':
+        cols = cols[1::2] #overlap_colnames_disp
+    else:
+        cols = cols[2::2] #overlap_colnames_disp
+    
+
+    fig_overlap_persub = go.Figure(data=[
+        go.Bar(name='Func/Anat overlap', x=overlap_colnames_disp, y=func_vals, marker_color=sequential.Magma[5]),
+        go.Bar(name='Anat ROI (no overlap)', x=overlap_colnames_disp, y=func_vals_nooverlap, marker_color=sequential.Magma[7])
+    ])
+    fig_overlap_persub.update_layout(barmode='stack', xaxis = dict(title = 'All time series', tickangle=45),
+                       yaxis = dict(title = 'Number of voxels'), margin={'t': 40},
+                       title='ROI overlap computed from all time series options - '+all_subs[selected_subnr])
+
+    return fig_overlap_persub
 
 
 # T-VALUES SUMMARY: UPDATE FIGURE
@@ -296,8 +382,6 @@ def reset_tval_summary_img(task, summary_opt, cluster_opt):
     tval_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-' + task + '_desc-' + summary_opt +'Tvalues.tsv')
     df_tval = pd.read_csv(tval_fn, sep='\t')
     data = []
-    # ts_names3 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    # ts_names = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
     ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
     ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
 
@@ -556,14 +640,14 @@ def reset_realtime_summary_img(cnr_opt, task, cluster_opt, psc_opt):
 
     layout = go.Layout(
         xaxis = dict(title = 'Time series'),
-        yaxis = dict(title='Percentage signal change', range=[-0.5, 2]),
+        yaxis = dict(title='Percentage signal change', range=[-0.5, 3]),
         margin={
               't': 10,
             })
     fig_realtime_summary = go.Figure(layout=layout)
 
     if psc_opt == 'glm':
-        cnr_fn = os.path.join(data_dir, 'sub-all_task-' + task + '_desc-' + cluster_opt +'_ROI' + cnr_opt + '.tsv')
+        cnr_fn = os.path.join(data_dir_v2, 'realtime', 'sub-all_task-' + task + '_desc-' + cluster_opt +'_ROI' + cnr_opt + '.tsv')
         df_cnr = pd.read_csv(cnr_fn, sep='\t')
         data = []
         ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
@@ -578,7 +662,7 @@ def reset_realtime_summary_img(cnr_opt, task, cluster_opt, psc_opt):
         
         fig_realtime_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
     else:
-        cnr_fn = os.path.join(data_dir, 'sub-all_task-' + task + '_desc-realtimeROI' + cnr_opt + '_' + psc_opt + '.tsv')
+        cnr_fn = os.path.join(data_dir_v2, 'realtime', 'sub-all_task-' + task + '_desc-realtimeROI' + cnr_opt + '_' + psc_opt + '.tsv')
         df_cnr = pd.read_csv(cnr_fn, sep='\t')
         data = []
         ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
@@ -616,7 +700,7 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
     fig_realtime_series = go.Figure(layout=layout)
 
     if psc_opt == 'glm':
-        psc_ts_fn = os.path.join(data_dir, sub + '_task-' + task + '_desc-' + cluster_opt + '_ROIpsc.tsv')
+        psc_ts_fn = os.path.join(data_dir_v2, 'realtime', sub + '_task-' + task + '_desc-' + cluster_opt + '_ROIpsc.tsv')
         df_psc_ts = pd.read_csv(psc_ts_fn, sep='\t')
         ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
         rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedT2STAR', 'RTcombinedTE', 'RTcombinedRTt2star', 'RTt2starFIT']
@@ -628,7 +712,7 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
             fig_realtime_series.update_yaxes(showticklabels=True)
         fig_realtime_series.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False)
     else:
-        psc_ts_fn = os.path.join(data_dir, sub + '_task-' + task + '_desc-realtimeROIsignals_psc' + psc_opt + '.tsv')
+        psc_ts_fn = os.path.join(data_dir_v2, 'realtime', sub + '_task-' + task + '_desc-realtimeROIsignals_psc' + psc_opt + '.tsv')
         df_psc_ts = pd.read_csv(psc_ts_fn, sep='\t')
         ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
         rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedT2STAR', 'RTcombinedTE', 'RTcombinedRTt2star', 'RTt2starFIT']
@@ -644,42 +728,11 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@app.callback(
-    Output("example-output", "children"),
-    [Input("example-button", "n_clicks"),
-     Input('fig_tsnr_mean', 'figure'),
-     Input('fig_tvals_summary', 'figure'),
-     Input('fig_clusters', 'figure')]
-)
-def on_button_click(n, fig_tsnr_mean, fig_tvals_summary, fig_clusters):
-    if n is None:
-        return "Not clicked."
-    else:
-        write_html(fig_tsnr_mean, os.path.join(data_dir, 'fig_tsnr_mean.html'))
-        write_html(fig_tvals_summary, os.path.join(data_dir, 'fig_tvals_summary.html'))
-        write_html(fig_clusters, os.path.join(data_dir, 'fig_clusters.html'))
-        return f"{n}"
-
-
-
-
-
+# @app.callback(
+#     Output('click-data', 'children'),
+#     [Input('fig7', 'clickData')])
+# def display_click_data(clickData):
+#     return json.dumps(clickData, indent=2)
 
 
 
@@ -710,18 +763,20 @@ def render_tab_content_page3(active_tab):
     ''')
 
     md_cluster_1 = dcc.Markdown('''
-    1st level analysis was done on all 6 time series, per task and per run (i.e. 6x2x2 = 24 times).
-    After thresholding of the resulting statistical maps (FWE, p < 0.05, extent threshold = 0), surviving cluster sizes were calculated in terms of the number of voxels.
-    These are shown below per task and run (use the radio buttons to switch between the options).  
+    Task-based GLM-analysis was done on all 6 time series of all 4 tasks, for each participant.
+    Thresholding of the resulting statistical maps was done at two levels: a conservative level (FWE, p < 0.05, extent threshold = 0)
+    and a less stringent threshold (no FWE, p < 0.001, 20 voxel extent threshold).
+    These are shortened, respectively, as `Task (FWE)` and `Task (noFWE)`.
+    In both cases, the number of surviving voxels determine the cluster size.
+    
+    Several other clusters / regions were also prepared within which the statistical values and other results of the multi-echo time series are calculated and compared.
+    The anatomical ROI derived from an atlas-based region (from the Jülich atlas) mapped to the subject functional space is called `Atlas-based`.
+    Then, the FWE-thresholded cluster images from all 6 time series (per task, per participant) were combined using both a logical AND and a logical OR procedure.
+    These are shortened as `All TS task (AND)` and `All TS task (OR)` respectively. 
     ''')
 
     md_cluster_2 = dcc.Markdown('''
-    Several other clusters / regions were prepared within which the statistical values and other results of the multi-echo time series are calculated and compared.
-    The abovementioned thresholding of the statistical maps resulting from 1st-level analysis is shortened as `Task (FWE)`.
-    A less stringent threshold was also applied (no FWE, p < 0.001, 20 voxel extent threshold) and was shortened `Task (noFWE)`.
-    The anatomical ROI derived from an atlas-based region (from the Jülich atlas) mapped to the subject functional space is called `Atlas-based`.
-    Then, the FWE thresholded cluster images from all 6 time series were combined using both a logical AND and a logical OR.
-    These are shortened as `All TS task (AND)` and `All TS task (OR)` respectively. 
+    
     
     ''')
 
@@ -767,13 +822,17 @@ def render_tab_content_page3(active_tab):
     ''')
 
     md_methods_1 = dcc.Markdown('''
-    Below is an overview of the main concepts and analysis steps that are followed to generate the main results for this work:
+    The `rt-me-fMRI` dataset was used in the following study:
+
+    [***Heunis et al., 2020. The effect of different multi-echo fMRI combination strategies on offline and real-time BOLD sensitivity. BioRxiv preprint.***]()
+
+    The main concepts and analysis steps that were investigated include:
     - Echo combination for signal recovery
     - Echo combination weights
     - Combining multi-echo data
     - Comparing the resulting timeseries
     
-    The measures resulting from these analysis steps can be explored using the various tabs on this page (tSNR, 1st-level clusters, etc)
+    The measures resulting from these analysis steps can be explored using the various tabs on this page (**tSNR**, **Task Regions**, etc)
     ''')
 
     md_methods_2 = dcc.Markdown('''One of the main known uses and benefits of multi-echo fMRI is echo-combination for signal recovery in areas of dropout.
@@ -803,7 +862,9 @@ def render_tab_content_page3(active_tab):
     md_methods_6 = dcc.Markdown('''Finally, several analysis steps are run on each of the 6 time series to allow comparison.
     ''')
 
-    md_methods_7 = dcc.Markdown(''' 
+    md_methods_7 = dcc.Markdown('''
+    Comparison metrics include tSNR, percentage signal change as effect size, T-statistic values, temporal percentage signal change (tPSC), functional contrasts, and temporal contrast to noise ratio (tCNR).
+    These can all be explored via the tabs on this page. 
     ''')
 
     md_realtime_1 = dcc.Markdown('''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -853,7 +914,7 @@ def render_tab_content_page3(active_tab):
                 md_methods_3,
                 html.Br([]),
                 html.Div(
-                    html.Img(src="/assets/me_fig_priorweights.png", width="60%"),
+                    html.Img(src="/assets/prior_weights.png", width="60%"),
                     style={
                         'textAlign': 'center'
                     }
@@ -861,7 +922,7 @@ def render_tab_content_page3(active_tab):
                 html.Br([]),
                 md_methods_4,
                 html.Div(
-                    html.Img(src="/assets/me_fig_rtT2star.png", width="60%"),
+                    html.Img(src="/assets/rapid_t2star_mapping.png", width="60%"),
                     style={
                         'textAlign': 'center'
                     }
@@ -871,22 +932,25 @@ def render_tab_content_page3(active_tab):
                 html.H5('Combining multi-echo data'),
                 md_methods_5,
                 html.Div(
-                    html.Img(src="/assets/me_fig_combinedTS.png", width="60%"),
+                    html.Img(src="/assets/combination_process.png", width="60%"),
                     style={
                         'textAlign': 'center'
                     }
                 ),
                 html.Br([]),
                 html.Br([]),
-                html.H5('Comparing resulting data'),
+                html.H5('Analysing and comparing resulting data'),
                 md_methods_6,
                 html.Br([]),
                 html.Div(
-                    html.Img(src="/assets/me_fig_compare.png", width="60%"),
+                    html.Img(src="/assets/time_series_analysis.png", width="60%"),
                     style={
                         'textAlign': 'center'
                     }
                 ),
+                html.Br([]),
+                md_methods_7,
+                
             ]
         elif active_tab == "tsnr-page3":
             return [
@@ -964,33 +1028,33 @@ def render_tab_content_page3(active_tab):
                 ]
         elif active_tab == "clusters":
             return [
-                html.H2('Task regions and sizes', style={'textAlign': 'center'}),
-                html.H5('1st-level cluster sizes'),
+                html.H2('Task regions and cluster sizes', style={'textAlign': 'center'}),
+                html.H5('Clusters/regions for comparisons'),
                 md_cluster_1,
                 html.Br([]),
                 dbc.Row([
                     dbc.Col([
-                        dbc.Row(dbc.Col([
-                            # dbc.Label('Task'),
-                            dbc.RadioItems(
-                                options=tasks_1stlevel_opts,
-                                value='motor',
-                                id="radio_tasks_clusters",
-                                inline=True,
-                            )],
-                        )),
-                    ], width={"size": 4, "offset": 2}),
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=tasks_1stlevel_opts_v2,
+                                    value='fingerTapping',
+                                    id="radio_tasks_clusters",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 6, "offset": 1}),
                     dbc.Col([
                         dbc.Row(dbc.Col([
-                            # dbc.Label('Run'),
-                            dbc.RadioItems(
-                                options=run_opts,
-                                value='1',
-                                id="radio_runs_clusters",
-                                inline=True,
-                            )],
+                            dcc.Dropdown(
+                                id='drop_clusteropts_clusters',
+                                options=clusters_opts,
+                                value='FWE',
+                            )
+                            ],
                         )),
-                    ], width={"size": 5, "offset": 1}),
+                    ], width={"size": 2, "offset": 1}),
                 ]),
                 dbc.Row([
                     dbc.Col([
@@ -1003,8 +1067,54 @@ def render_tab_content_page3(active_tab):
                     ),
 
                 ]),
-                html.H5('Clusters/regions for comparisons'),
+                html.H5('Anatomical-functional ROI overlap'),
                 md_cluster_2,
+                html.Br([]),
+                dbc.Row([
+                    dbc.Col([
+                        dbc.Row(
+                            dbc.Col([
+                                dbc.RadioItems(
+                                    options=tasks_1stlevel_opts_v2,
+                                    value='fingerTapping',
+                                    id="radio_tasks_overlap",
+                                    inline=True,
+                                )],
+                            )
+                        ),
+                    ], width={"size": 5, "offset": 1}),
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_timeseries_overlap',
+                                options=overlap_opts,
+                                value='echo2',
+                            )
+                            ],
+                        )),
+                    ], width={"size": 2, "offset": 0}),
+                    dbc.Col([
+                        dbc.Row(dbc.Col([
+                            dcc.Dropdown(
+                                id='drop_clusteropts_overlap',
+                                options=clusters_opts_overlap,
+                                value='FWE',
+                            )
+                            ],
+                        )),
+                    ], width={"size": 2, "offset": 1}),
+                ]),
+                dbc.Row(
+                    dbc.Col(
+                        dcc.Graph(figure=fig_overlap_summary, id='fig_overlap_summary')
+                    )
+                ),
+                html.Br([]),
+                dbc.Row(
+                    dbc.Col(
+                        dcc.Graph(figure=fig_overlap_persub, id='fig_overlap_persub')
+                    )
+                ),
                 ]
         elif active_tab == "tvals":
             return [
@@ -1301,7 +1411,7 @@ def render_tab_content_page3(active_tab):
                             dcc.Dropdown(
                                 id='drop_pscopts_realtimesummary',
                                 options=psc_types_opts,
-                                value='glm',
+                                value='cumulativebas',
                             )
                             ],
                         )),
@@ -1359,7 +1469,7 @@ def render_tab_content_page3(active_tab):
                             dcc.Dropdown(
                                 id='drop_pscopts_realtimeseries',
                                 options=psc_types_opts,
-                                value='glm',
+                                value='cumulativebas',
                             )
                             ],
                         )),

@@ -8,7 +8,7 @@ main_md = dcc.Markdown('''
 A full descriptions of the dataset (including participant details, ethics approval, experimental design, MRI protocol, preprocessing, and data quality)
 can be accessed in the data article:
 
-[***Heunis et al., 2020. Evaluating multi-echo fMRI combination and T2\*-mapping for offline and real-time BOLD sensitivity. BioRxiv preprint.***]()
+[***Heunis et al., 2020. rt-me-fMRI: A task and resting state dataset for real-time, multi-echo fMRI methods development and validation. BioRxiv preprint.***]()
 
 The `rt-me-fMRI` dataset was collected to explore multi-echo functional magnetic resonance imaging (fMRI) methods for real-time applications.
 It contains 6 runs of resting state and task data from 28 healthy volunteers, along with T1w scans and physiology data.
