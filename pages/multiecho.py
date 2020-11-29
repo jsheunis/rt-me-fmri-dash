@@ -762,6 +762,8 @@ def render_tab_content_page3(active_tab):
     md_tsnr_2 = dcc.Markdown('''
     To get a more representative view of the distribution of tSNR values for the various time series,
     the inputs below can be used to view whole brain gray matter tSNR per participant, task, and run.
+
+    *Note: due to storage limitations, the data of only two participants are available; for the app with all participant data, please refer to the about section.*
     ''')
 
     md_cluster_1 = dcc.Markdown('''
@@ -792,6 +794,8 @@ def render_tab_content_page3(active_tab):
 
     md_tval_2 = dcc.Markdown('''
     Here you can view the T-value distributions (within a selected region) of all time series per subject, task, and run.
+
+    *Note: due to storage limitations, the data of only two participants are available; for the app with all participant data, please refer to the about section.*
     ''')
 
     md_effectsize_1 = dcc.Markdown('''
@@ -803,6 +807,8 @@ def render_tab_content_page3(active_tab):
 
     md_effectsize_2 = dcc.Markdown('''
     Here you can view the contrast value distributions (within a selected region) of all time series per subject, task, and run. 
+
+    *Note: due to storage limitations, the data of only two participants are available; for the app with all participant data, please refer to the about section.*
     ''')
 
     md_psc_1 = dcc.Markdown('''
@@ -815,12 +821,24 @@ def render_tab_content_page3(active_tab):
 
     md_psc_2 = dcc.Markdown('''
     Here you can view the percentage signal change distributions (within a selected region) of all time series per subject, task, run.
+
+    *Note: due to storage limitations, the data of only two participants are available; for the app with all participant data, please refer to the about section.*
     ''')
 
     md_psc_3 = dcc.Markdown('''
     For the same subject, task, run, and region/cluster selected above, this figure shows the 6 time series in terms of percentage signal change.
     This percentage signal change was calculated per voxel and time point with regards to the particular time series mean,
     and then averaged over all voxels within each selected region respectively.   
+    ''')
+
+
+    md_psc_4 = dcc.Markdown('''
+    Temporal percentage signal change (tPSC) was calculated offline for all 6 minimally processed time series.
+    This was done per voxel and time point with regards to the respecitve time series mean, and then averaged over all voxels within predetermined ROIs.
+    This was followed by calculations for functional contrast and temporal contrast-to-noise ratio (tCNR) within the same ROIs.
+    To calculate the functional contrast in ROIs, the average tPSC in volumes classified as being part of "OFF" condition blocks are subtracted from the average signal in volumes classified as being part of each "ON" condition block.
+    Visually, this corresponds to the average amplitude difference between conditions in the tPSC signal.
+    To calculate tCNR, the functional contrast in an ROI is divided by the time series standard deviation of the tPSC signal in the same ROI.
     ''')
 
     md_methods_1 = dcc.Markdown('''
@@ -869,16 +887,24 @@ def render_tab_content_page3(active_tab):
     These can all be explored via the tabs on this page. 
     ''')
 
-    md_realtime_1 = dcc.Markdown('''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    md_realtime_1 = dcc.Markdown('''
+    All six minimally processed time series were analysed per-volume, i.e. in simulated real-time. This included:
+    - Spatial smoothing using a Gaussian kernel with FWHM at 7 mm
+    - Spatial averaging of voxel signals with defined ROIs
+    - Cumulative GLM-based detrending of the ROI signals, including linear and quadratic trend regressors.
+
+    These processed signals were then used to calculate per-volume temporal percentage signal change (tPSC) from mean.
+    The mean was defined in several ways, including the mean of the preceding baseline "OFF" block; the cumulative mean; and the cumulative baseline "OFF" block mean.
+
+    To calculate the functional contrast in ROIs, the average tPSC in volumes classified as being part of "OFF" condition blocks are subtracted from the average signal in volumes classified as being part of each "ON" condition block.
+    Visually, this corresponds to the average amplitude difference between conditions in the tPSC signal.
+    To calculate tCNR, the functional contrast in an ROI is divided by the time series standard deviation of the tPSC signal in the same ROI.
     ''')
 
-    md_realtime_2 = dcc.Markdown('''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    md_realtime_2 = dcc.Markdown('''
+    The tPSC signals, as described above, are provided here per participant, task, ROI, and mean calculation-type.
+
+    *Note: due to storage limitations, the data of only two participants are available; for the app with all participant data, please refer to the about section.*
     ''')
 
     if active_tab is not None:
@@ -1265,6 +1291,7 @@ def render_tab_content_page3(active_tab):
                 ]),
 
                 html.H5('CNR summary'),
+                md_psc_4,
                 html.Br([]),
                 dbc.Row([
                     dbc.Col([

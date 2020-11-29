@@ -238,14 +238,14 @@ layout = html.Div([
     [Output('fig2', 'figure'),
      Output('fig2b', 'figure'),
      Output('sub_fd', 'children')],
-    [Input('fig1', 'clickData')]
+    [Input('drop_subs_fd', 'value')]
 )
-def update_fd_persub_figs(clickData):
-    if clickData is None:
-        selected_sub = 'sub-001'
-        # raise PreventUpdate
-    else:
-        selected_sub = clickData['points'][0]['x']
+def update_fd_persub_figs(selected_sub):
+    # if clickData is None:
+    #     selected_sub = 'sub-001'
+    #     # raise PreventUpdate
+    # else:
+    #     selected_sub = clickData['points'][0]['x']
 
     fd_fn = os.path.join(data_dir, selected_sub+'_task-all_run-all_desc-fd.tsv')
     df_fd = pd.read_csv(fd_fn, sep='\t')
@@ -275,17 +275,17 @@ def update_fd_persub_figs(clickData):
 
 
 
-# Callback for updating tsnr html and figure based on drop1, radio1, radio2 values
-@app.callback(
-     Output('drop_subs_tsnr','value'),
-    [Input('fig4', 'clickData')]
-)
-def reset_sub_tsnr_info(clickData):
-    if clickData is None:
-        raise PreventUpdate
-    else:
-        selected_sub = all_subs[clickData['points'][0]['curveNumber']]
-    return selected_sub
+# # Callback for updating tsnr html and figure based on drop1, radio1, radio2 values
+# @app.callback(
+#      Output('drop_subs_tsnr','value'),
+#     [Input('fig4', 'clickData')]
+# )
+# def reset_sub_tsnr_info(clickData):
+#     if clickData is None:
+#         raise PreventUpdate
+#     else:
+#         selected_sub = all_subs[clickData['points'][0]['curveNumber']]
+#     return selected_sub
 
 
 @app.callback(
@@ -455,7 +455,17 @@ def render_tab_content(active_tab):
                 ),
                 html.Br([]),
                 html.H5('Framewise displacement distributions and timeseries: sub-001', id='sub_fd', style={'textAlign': 'left'}),
-                html.P('(Click on a subject distribution above to change the options below)', style={'textAlign': 'left'}),
+                html.Br([]),
+                dbc.Row([
+                    dbc.Col([
+                        dcc.Dropdown(
+                            id='drop_subs_fd',
+                            options=sub_opts,
+                            value='sub-001',
+                        )
+                        ], width={"size": 3, "offset": 0}),
+                ]),
+                html.Br([]),
                 dbc.Row(
                     dbc.Col(
                         dcc.Graph(figure=fig2, id='fig2')
