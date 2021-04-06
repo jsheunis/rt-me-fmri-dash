@@ -94,6 +94,11 @@ clusters_opts_overlap = [{'label': cluster_names_overlap[i], 'value': c} for i, 
 # -------
 # FIGURES
 # -------
+# Colormaps from https://colorbrewer2.org/#type=qualitative&scheme=Dark2&n=6
+colors = [['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c'],
+           ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33'],
+           ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462'],
+           ['#1b9e77', '#d95f02', '#7570b3', '#e7298a', '#66a61e', '#e6ab02']]
 fig_tsnr_mean = go.Figure()
 fig_tsnr_persub = go.Figure()
 fig_clusters = go.Figure()
@@ -220,7 +225,7 @@ def reset_tsnr_summary(tsnr_region, tsnr_run):
             else:
                 temp_dat = np.concatenate((temp_dat, df_tsnrmean[txt].to_numpy()))
         data2.append(temp_dat)
-        fig_tsnr_mean.add_trace(go.Violin(y=data2[x], line_color=sequential.Inferno[3+x], name=ts_names2_disp[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_tsnr_mean.add_trace(go.Violin(y=data2[x], line_color=colors[3][x], name=ts_names2_disp[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
 
     fig_tsnr_mean.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
 
@@ -256,9 +261,9 @@ def reset_metsnr_imgs(sub, task):
             new_dat[new_dat < 0] = math.nan
             new_dat[new_dat > 500] = math.nan
         data.append(new_dat)
-        fig_tsnr_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Inferno[8-x], name=ts_names_disp[x], points=False))
+        fig_tsnr_persub.add_trace(go.Violin(x=data[x], line_color=colors[3][5-x], name=ts_names_disp[x], points=False))
 
-    fig_tsnr_persub.update_traces(orientation='h', side='positive', width=2, box_visible=True, meanline_visible=True)
+    fig_tsnr_persub.update_traces(orientation='h', side='positive', width=2, box_visible=True, meanline_visible=True, spanmode='hard')
     fig_tsnr_persub.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, legend={'traceorder':'reversed'})
 
     return fig_tsnr_persub
@@ -288,7 +293,7 @@ def reset_cluster_img(task, cluster):
         txt = task + '_' + ts + '_' + cluster
         temp_dat_cluster = df_tvalclusters[txt].to_numpy()
         data_cluster.append(temp_dat_cluster)
-        fig_clusters.add_trace(go.Violin(y=data_cluster[x], line_color=sequential.Cividis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_clusters.add_trace(go.Violin(y=data_cluster[x], line_color=colors[3][x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
     
     fig_clusters.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
     return fig_clusters
@@ -391,7 +396,7 @@ def reset_tval_summary_img(task, summary_opt, cluster_opt):
         txt = ts + '_' + cluster_opt
         temp_dat = df_tval[txt].to_numpy()
         data.append(temp_dat)
-        fig_tvals_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Agsunset[0+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_tvals_summary.add_trace(go.Violin(y=data[x], line_color=colors[3][x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
 
     fig_tvals_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
 
@@ -427,7 +432,7 @@ def reset_tval_imgs(sub, task, cluster_opt):
         new_dat = df_tvals[txt].dropna().to_numpy()
 
         data.append(new_dat)
-        fig_tvals_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Agsunset[5-x], name=ts_names2[5-x], points=False))
+        fig_tvals_persub.add_trace(go.Violin(x=data[x], line_color=colors[3][5-x], name=ts_names2[5-x], points=False))
 
     fig_tvals_persub.update_traces(orientation='h', side='positive', width=2, box_visible=True, meanline_visible=True)
     fig_tvals_persub.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, legend={'traceorder':'reversed'})
@@ -462,7 +467,7 @@ def reset_effect_summary_img(task, summary_opt, cluster_opt):
         txt = ts + '_' + cluster_opt
         temp_dat = df_cval[txt].to_numpy()
         data.append(temp_dat)
-        fig_effect_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_effect_summary.add_trace(go.Violin(y=data[x], line_color=colors[3][x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
 
     fig_effect_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group')
     return fig_effect_summary
@@ -497,7 +502,7 @@ def reset_contrast_imgs(sub, task, cluster_opt):
         new_dat = df_cvals[txt].dropna().to_numpy()
 
         data.append(new_dat)
-        fig_effect_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Viridis[8-x], name=ts_names2[5-x], points=False))
+        fig_effect_persub.add_trace(go.Violin(x=data[x], line_color=colors[3][5-x], name=ts_names2[5-x], points=False))
 
     fig_effect_persub.update_traces(orientation='h', side='positive', width=2, box_visible=True, meanline_visible=True)
     fig_effect_persub.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, legend={'traceorder':'reversed'})
@@ -531,7 +536,7 @@ def reset_psc_summary_img(task, summary_opt, cluster_opt):
         txt = ts + '_' + cluster_opt
         temp_dat = df_psc[txt].to_numpy()
         data.append(temp_dat)
-        fig_psc_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_psc_summary.add_trace(go.Violin(y=data[x], line_color=colors[3][x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
     fig_psc_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
     return fig_psc_summary
 
@@ -565,7 +570,7 @@ def reset_psc_cnr_img(cnr_opt, task, cluster_opt):
         txt = ts + '_' + cluster_opt
         temp_dat = df_cnr[txt].to_numpy()
         data.append(temp_dat)
-        fig_cnr_offline.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+        fig_cnr_offline.add_trace(go.Violin(y=data[x], line_color=colors[3][x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
     
     fig_cnr_offline.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
 
@@ -602,7 +607,7 @@ def reset_psc_imgs(sub, task, cluster_opt):
         txt = ts + '_' + cluster_opt
         new_dat = df_psc[txt].dropna().to_numpy()
         data.append(new_dat)
-        fig_psc_persub.add_trace(go.Violin(x=data[x], line_color=sequential.Viridis[8-x], name=ts_names2[5-x], points=False))
+        fig_psc_persub.add_trace(go.Violin(x=data[x], line_color=colors[3][5-x], name=ts_names2[5-x], points=False))
 
     fig_psc_persub.update_traces(orientation='h', side='positive', width=2, box_visible=True, meanline_visible=True)
     fig_psc_persub.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, legend={'traceorder':'reversed'})
@@ -621,7 +626,7 @@ def reset_psc_imgs(sub, task, cluster_opt):
     for i, ts in enumerate(ts_colnames):
         txt = ts + '_' + cluster_opt
         data_pscts.append(df_psc_ts[txt].to_numpy())
-        fig_psc_timeseries.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=sequential.Viridis[3+i], width=2), name=ts_names2[i] ))
+        fig_psc_timeseries.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=colors[3][i], width=2), name=ts_names2[i] ))
         fig_psc_timeseries.update_yaxes(showticklabels=True)
 
     fig_psc_timeseries.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False)
@@ -660,7 +665,7 @@ def reset_realtime_summary_img(cnr_opt, task, cluster_opt, psc_opt):
             txt = 'glm_' + ts
             temp_dat = df_cnr[txt].to_numpy()
             data.append(temp_dat)
-            fig_realtime_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+            fig_realtime_summary.add_trace(go.Violin(y=data[x], line_color=colors[3][x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
         
         fig_realtime_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
     else:
@@ -676,7 +681,7 @@ def reset_realtime_summary_img(cnr_opt, task, cluster_opt, psc_opt):
             txt = ts + '_' + cluster_opt
             temp_dat = df_cnr[txt].to_numpy()
             data.append(temp_dat)
-            fig_realtime_summary.add_trace(go.Violin(y=data[x], line_color=sequential.Viridis[3+x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
+            fig_realtime_summary.add_trace(go.Violin(y=data[x], line_color=colors[3][x], name=ts_names[x], points='all', pointpos=-0.4, meanline_visible=True, width=1, side='positive', box_visible=True))
         
         fig_realtime_summary.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False, violinmode='group') # , legend={'traceorder':'reversed'}
 
@@ -710,7 +715,7 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
         for i, ts in enumerate(rtts_colnames):
             txt = 'glm_' + ts
             data_pscts.append(df_psc_ts[txt].to_numpy())
-            fig_realtime_series.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=sequential.Viridis[3+i], width=2), name=ts_names[i] ))
+            fig_realtime_series.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=colors[3][i], width=2), name=ts_names[i] ))
             fig_realtime_series.update_yaxes(showticklabels=True)
         fig_realtime_series.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False)
     else:
@@ -722,7 +727,7 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
         for i, ts in enumerate(rtts_colnames):
             txt = ts + '_' + cluster_opt
             data_pscts.append(df_psc_ts[txt].to_numpy())
-            fig_realtime_series.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=sequential.Viridis[3+i], width=2), name=ts_names[i] ))
+            fig_realtime_series.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=colors[3][i], width=2), name=ts_names[i] ))
             fig_realtime_series.update_yaxes(showticklabels=True)
         fig_realtime_series.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False)
 

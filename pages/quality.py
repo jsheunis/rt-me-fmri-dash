@@ -571,24 +571,24 @@ def render_tab_content(active_tab):
                 dbc.Row([
                     dbc.Col([
                         html.H5('Finger Tapping - Group level Tmap', style={'textAlign': 'center'}),
-                        html.Iframe(id='task_map1', src='/assets/sub-all_task-fingerTapping_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 250}),
+                        html.Iframe(id='task_map1', src='/assets/sub-all_task-fingerTapping_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 300}),
                         ]
                     ),
                     dbc.Col([
                         html.H5('Emotion Processing - Group level Tmap', style={'textAlign': 'center'}),
-                        html.Iframe(id='task_map2', src='/assets/sub-all_task-emotionProcessing_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 250}),
+                        html.Iframe(id='task_map2', src='/assets/sub-all_task-emotionProcessing_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 300}),
                         ]
                     )]
                 ),
                 dbc.Row([
                     dbc.Col([
                         html.H5('Finger Tapping (imagined) - Group level Tmap', style={'textAlign': 'center'}),
-                        html.Iframe(id='task_map3', src='/assets/sub-all_task-fingerTappingImagined_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 250}),
+                        html.Iframe(id='task_map3', src='/assets/sub-all_task-fingerTappingImagined_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 300}),
                         ]
                     ),
                     dbc.Col([
                         html.H5('Emotion Processing (imagined) - Group level Tmap', style={'textAlign': 'center'}),
-                        html.Iframe(id='task_map4', src='/assets/sub-all_task-emotionProcessingImagined_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 250}),
+                        html.Iframe(id='task_map4', src='/assets/sub-all_task-emotionProcessingImagined_space-MNI152_desc-2ndlevel_tmap.html', style={'border': 'none', 'width': '100%', 'height': 300}),
                         ]
                     )]
                 ),
