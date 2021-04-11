@@ -726,13 +726,25 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
         data_pscts = []
         for i, ts in enumerate(rtts_colnames):
             txt = ts + '_' + cluster_opt
-            data_pscts.append(df_psc_ts[txt].to_numpy())
+
+            if psc_opt == 'cumulative' or psc_opt == 'cumulativebas':
+                window = 3
+                raw_data = df_psc_ts[txt].to_numpy()
+                filtered_data = np.zeros_like(raw_data)
+                for j, x in enumerate(raw_data):
+                    if j < window:
+                        filtered_data[j] = np.mean(raw_data[0:j+1])
+                    else:
+                        filtered_data[j] = np.mean(raw_data[j-window+1:j+1])
+                data_pscts.append(filtered_data)
+            else:
+                data_pscts.append(df_psc_ts[txt].to_numpy())
+            
             fig_realtime_series.add_trace(go.Scatter(y=data_pscts[i], mode='lines', line = dict(color=colors[3][i], width=2), name=ts_names[i] ))
             fig_realtime_series.update_yaxes(showticklabels=True)
         fig_realtime_series.update_layout(xaxis_showgrid=True, yaxis_showgrid=True, xaxis_zeroline=False)
 
     return fig_realtime_series
-
 
 
 # @app.callback(
@@ -908,6 +920,7 @@ def render_tab_content_page3(active_tab):
 
     md_realtime_2 = dcc.Markdown('''
     The tPSC signals, as described above, are provided here per participant, task, ROI, and mean calculation-type.
+    For the `cumulative` and `cumulative baseline` mean calculation types, a 3-point temporal averaging filter was applied to the tPSC signals, as is common in real-time ROI neurofeedback applications.
 
     *Note: due to storage limitations, the data of only two participants are available; for the app with all participant data, please refer to the about section.*
     ''')
