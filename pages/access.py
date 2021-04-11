@@ -31,7 +31,10 @@ attribution1_md = dcc.Markdown('''
 Papers, book chapters, books, posters, oral presentations, and all other presentations of results derived from the `rt-me-fMRI` dataset should acknowledge the origin of the data as follows:
 ''')
 attribution2_md = dcc.Markdown('''
-In addition, please use the following citation:
+In addition, please use the following citation when referring to the dataset:
+''')
+attribution3_md = dcc.Markdown('''
+And the following citation when referring to the methods article:
 ''')
 
 # [***Heunis et al., 2020. Evaluating multi-echo fMRI combination and T2\*-mapping for offline and real-time BOLD sensitivity. BioRxiv preprint.***]()
@@ -101,7 +104,25 @@ layout = html.Div([
     ),
     attribution2_md,
     html.Blockquote(
-        'Heunis et al., 2020. Evaluating multi-echo fMRI combination and T2*-mapping for offline and real-time BOLD sensitivity. BioRxiv preprint.',
+        'Heunis, S., Breeuwer, M., Caballero-Gaudes, C., Hellrung, L., Huijbers, W., Jansen, J.F.A., Lamerichs, R., Zinger, S., Aldenkamp, A.P., 2021. rt-me-fMRI: a task and resting state dataset for real-time, multi-echo fMRI methods development and validation. F1000Res 10, 70. https://doi.org/10.12688/f1000research.29988.1',
+        style={
+            'borderLeft': '4px solid rgb(98, 186, 181)',
+            'paddingLeft': '1rem',
+            'paddingRight': '1rem',
+            'marginTop': '2rem',
+            'marginBottom': '2rem',
+            'marginLeft': '10rem',
+            'marginRight': '10rem',
+            'fontStyle': 'italic',
+            'fontSize': '0.85em',
+            'backgroundColor': 'rgb(237, 249, 247)',
+            'paddingTop': '5px',
+            'paddingBottom': '5px'
+        }
+    ),
+    attribution3_md,
+    html.Blockquote(
+        'Heunis, S., Breeuwer, M., Caballero-Gaudes, C., Hellrung, L., Huijbers, W., Jansen, J.F., Lamerichs, R., Zinger, S., Aldenkamp, A.P., 2020. The effects of multi-echo fMRI combination and rapid T2*-mapping on offline and real-time BOLD sensitivity. bioRxiv 2020.12.08.416768. https://doi.org/10.1101/2020.12.08.416768',
         style={
             'borderLeft': '4px solid rgb(98, 186, 181)',
             'paddingLeft': '1rem',

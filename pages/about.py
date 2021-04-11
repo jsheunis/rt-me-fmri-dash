@@ -86,7 +86,7 @@ layout = html.Div([
             html.Br(),
             dbc.Button(
                 html.Span([html.I(className="fas fa-book ml-2"), '   Data article']),
-                href="https://dataverse.nl/dataverse/rt-me-fmri",
+                href="https://doi.org/10.12688/f1000research.29988.1",
                 style={
                     'marginLeft': '5px',
                     'marginRight': '10px',
@@ -97,7 +97,7 @@ layout = html.Div([
             html.Br(),
             dbc.Button(
                 html.Span([html.I(className="fas fa-book ml-2"), '   Methods article']),
-                href="https://dataverse.nl/dataverse/rt-me-fmri",
+                href="https://doi.org/10.1101/2020.12.08.416768",
                 style={
                     'marginLeft': '5px',
                     'marginRight': '10px',

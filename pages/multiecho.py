@@ -31,8 +31,8 @@ sub2_opts = [{'label': sub, 'value': sub} for sub in subs2]
 sub_opts = [{'label': sub, 'value': sub} for sub in all_subs]
 task_opts = [{'label': task.capitalize(), 'value': task} for task in tasks]
 run_opts = [{'label': 'Run '+run, 'value': run} for run in runs]
-ts_names = ['t2starFIT', 'combinedMEt2starFIT', 'combinedMEte', 'combinedMEt2star', 'combinedMEtsnr', 'echo-2']
-ts_names_disp = ['T2*FIT', 'T2*FIT-combined', 'TE-combined', 'T2*-combined', 'tSNR-combined', 'Echo 2']
+ts_names = ['t2starFIT', 'combinedMEt2starFIT', 'combinedMEt2star', 'combinedMEte', 'combinedMEtsnr', 'echo-2']
+ts_names_disp = ['T2*FIT', 'T2*FIT-combined', 'T2*-combined', 'TE-combined', 'tSNR-combined', 'Echo 2']
 ts_opts = [{'label': ts_names_disp[i], 'value': ts} for i, ts in enumerate(ts_names)]
 tasks_1stlevel = ['motor', 'emotion']
 tasks_1stlevel_opts = [{'label': task.capitalize(), 'value': task} for task in tasks_1stlevel]
@@ -80,8 +80,8 @@ for i, task in enumerate(tasks_1stlevel_v2):
     txt = 'task-' + task
     overlapData[txt] = pd.read_csv(os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-' + task + '_desc-roiOverlap.tsv'), sep='\t')
 
-overlap_colnames_disp = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-overlap_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+overlap_colnames_disp = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+overlap_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
 overlap_opts = [{'label': overlap_colnames_disp[i], 'value': ts} for i, ts in enumerate(overlap_colnames)]
 
 clusters_overlap = ['FWE', 'noFWE']
@@ -208,8 +208,8 @@ def reset_tsnr_summary(tsnr_region, tsnr_run):
 
     df_tsnrmean = pd.read_csv(tsnrmean_fn, sep='\t')
     data2 = []
-    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEt2star', 'combinedMEte', 'combinedMEt2starFIT', 't2starFIT']
-    ts_names2_disp = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_names2 = ['echo-2', 'combinedMEtsnr', 'combinedMEte', 'combinedMEt2star', 'combinedMEt2starFIT', 't2starFIT']
+    ts_names2_disp = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
 
     if tsnr_run == 'all runs':
         # cols_tasksruns = ['motor_1', 'emotion_1', 'rest_2', 'motor_2', 'emotion_2']
@@ -286,8 +286,8 @@ def reset_cluster_img(task, cluster):
     tvalclusters_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-all_desc-clusterSizes.tsv')
     df_tvalclusters = pd.read_csv(tvalclusters_fn, sep='\t')
     data_cluster = []
-    ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-    ts_names3 = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+    ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_names3 = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
 
     for x, ts in enumerate(ts_names3):
         txt = task + '_' + ts + '_' + cluster
@@ -389,8 +389,8 @@ def reset_tval_summary_img(task, summary_opt, cluster_opt):
     tval_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-' + task + '_desc-' + summary_opt +'Tvalues.tsv')
     df_tval = pd.read_csv(tval_fn, sep='\t')
     data = []
-    ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+    ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
 
     for x, ts in enumerate(ts_colnames):
         txt = ts + '_' + cluster_opt
@@ -422,8 +422,8 @@ def reset_tval_imgs(sub, task, cluster_opt):
     fig_tvals_persub = go.Figure(layout=layout)
 
     data = []
-    ts_names2 = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+    ts_names2 = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
     tval_fn = os.path.join(data_dir_v2, 'multiecho', sub+'_task-'+task+'_desc-tmapvalues.tsv')
     df_tvals = pd.read_csv(tval_fn, sep='\t')
 
@@ -460,8 +460,8 @@ def reset_effect_summary_img(task, summary_opt, cluster_opt):
     cval_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-' + task + '_desc-' + summary_opt +'Cvalues.tsv')
     df_cval = pd.read_csv(cval_fn, sep='\t')
     data = []
-    ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+    ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
 
     for x, ts in enumerate(ts_colnames):
         txt = ts + '_' + cluster_opt
@@ -492,8 +492,8 @@ def reset_contrast_imgs(sub, task, cluster_opt):
     fig_effect_persub = go.Figure(layout=layout)
 
     data = []
-    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
-    ts_names2 = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_names2 = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
     cval_fn = os.path.join(data_dir_v2, 'multiecho', sub+'_task-'+task+'_desc-cmapvalues.tsv')
     df_cvals = pd.read_csv(cval_fn, sep='\t')
 
@@ -529,8 +529,8 @@ def reset_psc_summary_img(task, summary_opt, cluster_opt):
     psc_fn = os.path.join(data_dir_v2, 'multiecho', 'sub-all_task-' + task +'_desc-' + summary_opt +'PSCvalues.tsv')
     df_psc = pd.read_csv(psc_fn, sep='\t')
     data = []
-    ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+    ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
 
     for x, ts in enumerate(ts_colnames):
         txt = ts + '_' + cluster_opt
@@ -561,8 +561,8 @@ def reset_psc_cnr_img(cnr_opt, task, cluster_opt):
     df_cnr = pd.read_csv(cnr_fn, sep='\t')
 
     data = []
-    ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+    ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
 
     # ['glm_RTecho2', 'kalm_RTecho2', 'glm_RTcombinedTSNR', 'kalm_RTcombinedTSNR', 'glm_RTcombinedT2STAR', 'kalm_RTcombinedT2STAR', 'glm_RTcombinedTE', 'kalm_RTcombinedTE', 'glm_RTcombinedRTt2star', 'kalm_RTcombinedRTt2star', 'glm_RTt2starFIT', 'kalm_RTt2starFIT', 'glm_RTs0FIT', 'kalm_RTs0FIT']
 
@@ -597,8 +597,8 @@ def reset_psc_imgs(sub, task, cluster_opt):
     fig_psc_persub = go.Figure(layout=layout)
 
     data = []
-    ts_names2 = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-    ts_colnames = ['echo2', 'combTSNR', 'combT2STAR', 'combTE', 'combT2STARfit', 'T2STARfit']
+    ts_names2 = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+    ts_colnames = ['echo2', 'combTSNR', 'combTE', 'combT2STAR', 'combT2STARfit', 'T2STARfit']
 
     psc_fn = os.path.join(data_dir_v2, 'multiecho', sub+'_task-'+task+'_desc-PSCvalues.tsv')
     df_psc = pd.read_csv(psc_fn, sep='\t')
@@ -657,8 +657,8 @@ def reset_realtime_summary_img(cnr_opt, task, cluster_opt, psc_opt):
         cnr_fn = os.path.join(data_dir_v2, 'realtime', 'sub-all_task-' + task + '_desc-' + cluster_opt +'_ROI' + cnr_opt + '.tsv')
         df_cnr = pd.read_csv(cnr_fn, sep='\t')
         data = []
-        ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedT2STAR', 'RTcombinedTE', 'RTcombinedRTt2star', 'RTt2starFIT']
+        ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedTE', 'RTcombinedT2STAR', 'RTcombinedRTt2star', 'RTt2starFIT']
 
         # ['glm_RTecho2', 'kalm_RTecho2', 'glm_RTcombinedTSNR', 'kalm_RTcombinedTSNR', 'glm_RTcombinedT2STAR', 'kalm_RTcombinedT2STAR', 'glm_RTcombinedTE', 'kalm_RTcombinedTE', 'glm_RTcombinedRTt2star', 'kalm_RTcombinedRTt2star', 'glm_RTt2starFIT', 'kalm_RTt2starFIT', 'glm_RTs0FIT', 'kalm_RTs0FIT']
         for x, ts in enumerate(rtts_colnames):
@@ -672,8 +672,8 @@ def reset_realtime_summary_img(cnr_opt, task, cluster_opt, psc_opt):
         cnr_fn = os.path.join(data_dir_v2, 'realtime', 'sub-all_task-' + task + '_desc-realtimeROI' + cnr_opt + '_' + psc_opt + '.tsv')
         df_cnr = pd.read_csv(cnr_fn, sep='\t')
         data = []
-        ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedT2STAR', 'RTcombinedTE', 'RTcombinedRTt2star', 'RTt2starFIT']
+        ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedTE', 'RTcombinedT2STAR', 'RTcombinedRTt2star', 'RTt2starFIT']
 
         # ['glm_RTecho2', 'kalm_RTecho2', 'glm_RTcombinedTSNR', 'kalm_RTcombinedTSNR', 'glm_RTcombinedT2STAR', 'kalm_RTcombinedT2STAR', 'glm_RTcombinedTE', 'kalm_RTcombinedTE', 'glm_RTcombinedRTt2star', 'kalm_RTcombinedRTt2star', 'glm_RTt2starFIT', 'kalm_RTt2starFIT', 'glm_RTs0FIT', 'kalm_RTs0FIT']
         # realtimeROItcnr
@@ -709,8 +709,8 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
     if psc_opt == 'glm':
         psc_ts_fn = os.path.join(data_dir_v2, 'realtime', sub + '_task-' + task + '_desc-' + cluster_opt + '_ROIpsc.tsv')
         df_psc_ts = pd.read_csv(psc_ts_fn, sep='\t')
-        ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedT2STAR', 'RTcombinedTE', 'RTcombinedRTt2star', 'RTt2starFIT']
+        ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedTE', 'RTcombinedT2STAR', 'RTcombinedRTt2star', 'RTt2starFIT']
         data_pscts = []
         for i, ts in enumerate(rtts_colnames):
             txt = 'glm_' + ts
@@ -721,8 +721,8 @@ def reset_realtime_series_img(sub, task, cluster_opt, psc_opt):
     else:
         psc_ts_fn = os.path.join(data_dir_v2, 'realtime', sub + '_task-' + task + '_desc-realtimeROIsignals_psc' + psc_opt + '.tsv')
         df_psc_ts = pd.read_csv(psc_ts_fn, sep='\t')
-        ts_names = ['Echo 2', 'tSNR-combined', 'T2*-combined', 'TE-combined', 'T2*FIT-combined', 'T2*FIT']
-        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedT2STAR', 'RTcombinedTE', 'RTcombinedRTt2star', 'RTt2starFIT']
+        ts_names = ['Echo 2', 'tSNR-combined', 'TE-combined', 'T2*-combined', 'T2*FIT-combined', 'T2*FIT']
+        rtts_colnames = ['RTecho2', 'RTcombinedTSNR', 'RTcombinedTE', 'RTcombinedT2STAR', 'RTcombinedRTt2star', 'RTt2starFIT']
         data_pscts = []
         for i, ts in enumerate(rtts_colnames):
             txt = ts + '_' + cluster_opt
@@ -849,7 +849,7 @@ def render_tab_content_page3(active_tab):
     md_methods_1 = dcc.Markdown('''
     The `rt-me-fMRI` dataset was used in the following study:
 
-    [***Heunis et al., 2020. The effect of different multi-echo fMRI combination strategies on offline and real-time BOLD sensitivity. BioRxiv preprint.***]()
+    [***Heunis et al., 2020. The effects of multi-echo fMRI combination and rapid T2\*-mapping on offline and real-time BOLD sensitivity. bioRxiv.***](https://doi.org/10.1101/2020.12.08.416768)
 
     The main concepts and analysis steps that were investigated include:
     - Echo combination for signal recovery

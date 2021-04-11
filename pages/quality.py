@@ -398,7 +398,7 @@ quality1_md = dcc.Markdown('''
 The anatomical and functional data of all participants underwent standard preprocessing and quality control steps (depicted below),
 using the open source MATLAB-based and Octave-compatible [`fMRwhy`](https://github.com/jsheunis/fMRwhy) toolbox.
 
-The BIDS-compatible data quality pipeline (`fmrwhy_bids_workflowQC`) generates participant-specific HTML-reports with quality control metrics and visualizations to allow inspection of the data and its derivatives.
+The BIDS-compatible data quality pipeline (`fmrwhy_workflow_qc`) generates participant-specific HTML-reports with quality control metrics and visualizations to allow inspection of the data and its derivatives.
 Individual reports can be accessed in the derivatives directory of `rt-me-fMRI` dataset.
 
 This site allows exploring quality measures for all participants and functional runs, such as **framewise displacement**, **temporal signal-to-noise ratio**, **physiology traces**, and **group activity maps**.
